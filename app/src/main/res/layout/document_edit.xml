@@ -7,22 +7,116 @@
         android:id="@+id/message2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
         android:layout_marginLeft="@dimen/activity_horizontal_margin"
         android:layout_marginStart="@dimen/activity_horizontal_margin"
         android:layout_marginTop="@dimen/activity_vertical_margin"
-        android:text="Катя" />
+        android:text="Название документа" />
 
     <Button
         android:id="@+id/show_document"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/message2"
-        android:layout_marginLeft="185dp"
-        android:layout_marginStart="185dp"
-        android:layout_marginTop="28dp"
-        android:layout_toEndOf="@+id/message2"
-        android:layout_toRightOf="@+id/message2"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+
         android:text="Предпросмотр документ" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/show_document"
+        android:layout_below="@id/message2">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/nomer_gruppy"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/message2"
+                android:hint="номер группы"
+                android:inputType="number" />
+
+            <EditText
+                android:id="@+id/fio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/nomer_gruppy"
+                android:hint="Ф.И.О."
+                android:inputType="textMultiLine" />
+
+            <EditText
+                android:id="@+id/studbilet"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/fio"
+                android:hint="№ студ. билета"
+                android:inputType="number" />
+
+            <TextView
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RadioGroup
+                    android:id="@+id/radioGroup"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/sdacha"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Сдача" />
+
+                <RadioButton
+                    android:id="@+id/peresdacha"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Пересдача" />
+
+                </RadioGroup>
+
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/disciplina"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/peresdacha"
+                android:hint="Дисциплина"
+                android:inputType="textMultiLine" />
+
+            <EditText
+                android:id="@+id/date_of_exam"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/disciplina"
+                android:hint="Дата месяц год экзамена"
+                android:inputType="date" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/date_of_exam"
+                android:hint="Дата"
+                android:inputType="date" />
+
+        </LinearLayout>
+    </ScrollView>
 
 
 </RelativeLayout>
