@@ -13,11 +13,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="81dp"
-        android:layout_marginEnd="208dp"
+        android:layout_marginEnd="16dp"
         android:text="Регистрация"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/DocStatus"
         tools:ignore="MissingConstraints" />
 
     <android.support.design.widget.BottomNavigationView
@@ -28,44 +27,42 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/gridLayout"
         app:menu="@menu/navigation" />
 
     <ImageView
-        android:id="@+id/studBilet"
+        android:id="@+id/imageView2"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginBottom="8dp"
+        android:layout_marginEnd="9dp"
+        android:layout_marginStart="9dp"
         android:layout_marginTop="16dp"
         android:src="@drawable/stud"
-        app:layout_constraintBottom_toTopOf="@+id/DocStatus"
+        app:layout_constraintBottom_toTopOf="@+id/gridLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <GridLayout
-        android:id="@+id/DocStatus"
+        android:id="@+id/gridLayout"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="21dp"
+        android:layout_marginBottom="81dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:columnCount="2"
         android:rowCount="1"
-        app:layout_constraintBottom_toTopOf="@+id/registration"
+        app:layout_constraintBottom_toTopOf="@+id/navigation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/studBilet">
-        
+        app:layout_constraintTop_toBottomOf="@+id/imageView2">
 
         <TextView
-            android:layout_column="1"
-            android:layout_row="0"
-            android:text="Название документа" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Документ" />
 
-        <TextView
-            android:layout_column="0"
-            android:layout_row="0"
-            android:text="Статус документа" />
     </GridLayout>
 
 

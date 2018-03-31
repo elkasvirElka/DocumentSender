@@ -3,70 +3,26 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!--<GridLayout-->
-        <!--android:id="@+id/DocReestr"-->
-        <!--android:layout_width="0dp"-->
-        <!--android:layout_height="0dp"-->
-        <!--android:layout_alignParentBottom="true"-->
-        <!--android:layout_alignParentEnd="true"-->
-        <!--android:layout_constraintBottom_toTopOf="@+id/registration"-->
-        <!--android:layout_constraintEnd_toEndOf="parent"-->
-        <!--android:layout_constraintStart_toStartOf="parent"-->
-        <!--android:layout_constraintTop_toBottomOf="@+id/studBilet"-->
-        <!--android:layout_marginBottom="265dp"-->
-        <!--android:layout_marginEnd="180dp"-->
-        <!--android:columnCount="2"-->
-        <!--android:rowCount="1">-->
-
-        <!--<TextView-->
-            <!--android:layout_column="1"-->
-            <!--android:layout_row="0"-->
-            <!--android:text="Название документа" />-->
-
-        <!--<TextView-->
-            <!--android:layout_column="0"-->
-            <!--android:layout_row="0"-->
-            <!--android:text="Назначение документа" />-->
-    <!--</GridLayout>-->
-
-    <!--<Button-->
-        <!--android:id="@+id/edit_document"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_below="@+id/message2"-->
-        <!--android:layout_marginLeft="185dp"-->
-        <!--android:layout_marginStart="185dp"-->
-        <!--android:layout_marginTop="28dp"-->
-        <!--android:layout_toEndOf="@+id/message2"-->
-        <!--android:layout_toRightOf="@+id/message2"-->
-        <!--android:text="Редактировать документ" />-->
-
-
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="fill_parent"
+    <TextView
+        android:id="@+id/message2"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:minHeight="50dp"
-        android:orientation="horizontal" >
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:text="Настя" />
 
-        <TextView
-            android:id="@+id/imagepart"
-            android:layout_width="158dp"
-            android:layout_height="30dp"
-            android:text="Название документа" />
+    <Button
+        android:id="@+id/edit_document"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/message2"
+        android:layout_marginLeft="185dp"
+        android:layout_marginStart="185dp"
+        android:layout_marginTop="28dp"
+        android:layout_toEndOf="@+id/message2"
+        android:layout_toRightOf="@+id/message2"
+        android:text="Редактировать документ" />
 
-        <TextView
-            android:id="@+id/textpart"
-            android:layout_width="186dp"
-            android:layout_height="30dp"
-            android:width="7dp"
-            android:text="Предназначение документа" />
-
-        <Button
-            android:id="@+id/edit_document"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Редактировать" />
-
-    </LinearLayout>
 
 </RelativeLayout>
