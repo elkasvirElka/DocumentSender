@@ -1,7 +1,7 @@
 <resources>
-    <string name="app_name">DocumentSender</string>
-    <string name="title_home">Home</string>
-    <string name="title_data">Data</string>
-    <string name="title_notifications">Notifications</string>
-    <string name="navigation_settings">Settings</string>
+    <string name="app_name">Документы КАИ</string>
+    <string name="title_home">Главная</string>
+    <string name="title_data">Доки</string>
+    <string name="account">Аккаунт</string>
+    <string name="navigation_settings">Настройки</string>
 </resources>

@@ -1,52 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <!--<GridLayout-->
-        <!--android:id="@+id/DocReestr"-->
-        <!--android:layout_width="0dp"-->
-        <!--android:layout_height="0dp"-->
-        <!--android:layout_alignParentBottom="true"-->
-        <!--android:layout_alignParentEnd="true"-->
-        <!--android:layout_constraintBottom_toTopOf="@+id/registration"-->
-        <!--android:layout_constraintEnd_toEndOf="parent"-->
-        <!--android:layout_constraintStart_toStartOf="parent"-->
-        <!--android:layout_constraintTop_toBottomOf="@+id/studBilet"-->
-        <!--android:layout_marginBottom="265dp"-->
-        <!--android:layout_marginEnd="180dp"-->
-        <!--android:columnCount="2"-->
-        <!--android:rowCount="1">-->
-
-        <!--<TextView-->
-            <!--android:layout_column="1"-->
-            <!--android:layout_row="0"-->
-            <!--android:text="Название документа" />-->
-
-        <!--<TextView-->
-            <!--android:layout_column="0"-->
-            <!--android:layout_row="0"-->
-            <!--android:text="Назначение документа" />-->
-    <!--</GridLayout>-->
-
-    <!--<Button-->
-        <!--android:id="@+id/edit_document"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_below="@+id/message2"-->
-        <!--android:layout_marginLeft="185dp"-->
-        <!--android:layout_marginStart="185dp"-->
-        <!--android:layout_marginTop="28dp"-->
-        <!--android:layout_toEndOf="@+id/message2"-->
-        <!--android:layout_toRightOf="@+id/message2"-->
-        <!--android:text="Редактировать документ" />-->
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:minHeight="50dp"
-        android:orientation="horizontal" >
+        android:orientation="horizontal">
 
         <TextView
             android:id="@+id/imagepart"
@@ -68,5 +31,14 @@
             android:text="Редактировать" />
 
     </LinearLayout>
+
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/navigation2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:background="?android:attr/windowBackground"
+        app:menu="@menu/navigation" />
 
 </RelativeLayout>
