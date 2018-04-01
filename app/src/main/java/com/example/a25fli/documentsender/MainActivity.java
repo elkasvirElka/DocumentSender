@@ -15,14 +15,14 @@ public class MainActivity extends Activity {
 
     private TextView mTextMessage;
 
-    public BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    Intent intent = new Intent(MainActivity.this, MainActivity.class);
+                    Intent intent = new Intent(MainActivity.this, HistoryActivity.class);
                     startActivity(intent);
                     break;
                 case R.id.navigation_documents:
