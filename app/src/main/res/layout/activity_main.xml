@@ -15,10 +15,20 @@
         android:layout_marginBottom="81dp"
         android:layout_marginEnd="208dp"
         android:text="Регистрация"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/DocStatus"
         tools:ignore="MissingConstraints" />
+
+    <FrameLayout
+        android:id="@+id/frame_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/navigation"
+        android:animateLayoutChanges="true">
+
+    </FrameLayout>
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/navigation"
@@ -37,6 +47,7 @@
         android:layout_marginBottom="8dp"
         android:layout_marginTop="16dp"
         android:src="@drawable/stud"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/DocStatus"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -45,27 +56,37 @@
     <GridLayout
         android:id="@+id/DocStatus"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="150dp"
         android:layout_marginBottom="21dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:columnCount="2"
+        android:columnCount="3"
         android:rowCount="1"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/registration"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/studBilet">
-        
 
         <TextView
+            android:layout_width="60dp"
+            android:layout_column="0"
+            android:layout_row="0"
+            android:text="Номер" />
+
+        <TextView
+            android:layout_width="135dp"
             android:layout_column="1"
             android:layout_row="0"
             android:text="Название документа" />
 
         <TextView
-            android:layout_column="0"
+            android:layout_width="102dp"
+            android:layout_column="2"
             android:layout_row="0"
             android:text="Статус документа" />
+
+
     </GridLayout>
 
 

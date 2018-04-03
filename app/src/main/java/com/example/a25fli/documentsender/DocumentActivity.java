@@ -2,28 +2,35 @@ package com.example.a25fli.documentsender;
 
 
 import android.app.Activity;
+import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 
 
-public class DocumentActivity extends MainActivity {
+public class DocumentActivity extends Fragment {
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.document);
-        Button edit_document = findViewById(R.id.edit_document);
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation2);
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
+        Button edit_document = getView().findViewById(R.id.edit_document);
 
         edit_document.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(DocumentActivity.this, DocumentEditActivity.class);
+                Intent intent = new Intent(getActivity(), DocumentEditActivity.class);
                 startActivity(intent);
             }
         });
     }
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.document, container, false);
+    }
+
 }
