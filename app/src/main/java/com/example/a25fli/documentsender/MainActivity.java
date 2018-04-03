@@ -25,8 +25,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mTextMessage = (TextView) findViewById(R.id.message);
-       // BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
-        //navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+       // BottomNavigationView navigation_items = (BottomNavigationView) findViewById(R.id.navigation_items);
+        //navigation_items.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         BottomNavigationView bottomNavigationView = (BottomNavigationView)
                 findViewById(R.id.navigation);
 
@@ -39,12 +39,16 @@ public class MainActivity extends AppCompatActivity {
                             case R.id.navigation_home:
                                 selectedFragment = HistoryActivity.newInstance();
                                 break;
-//                case R.id.action_item2:
-//                    selectedFragment = ItemTwoFragment.newInstance();
-//                    break;
+                            case R.id.navigation_documents:
+                                selectedFragment = DocumentActivity.newInstance();
+                                break;
 //                case R.id.action_item3:
 //                    selectedFragment = ItemThreeFragment.newInstance();
 //                    break;
+                        }
+
+                        if (selectedFragment == null) {
+                            return false;
                         }
                         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
                         transaction.replace(R.id.frame_layout, selectedFragment);
