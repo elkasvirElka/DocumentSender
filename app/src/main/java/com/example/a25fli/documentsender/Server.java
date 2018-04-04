@@ -30,8 +30,15 @@ public class Server {
         client.newCall(new Request.Builder().url(url).post(body).build()).enqueue(callback);
     }
 
-    public void getDocList(Callback callback, int userId) {
+    public void getDocList(Callback callback) {
         makeGetRequest(getHttpBuilder().addPathSegment("doc_list")
-                .addQueryParameter("userId", String.valueOf(userId)).build(), callback);
+                .build(), callback);
+    }
+    public void getDocEditFields(Callback callback, String userId) {
+        if(userId == null || userId == ""){
+            userId = "0";
+        }
+        makeGetRequest(getHttpBuilder().addPathSegment("doc_fields")
+                .addQueryParameter("id", String.valueOf(userId)).build(), callback);
     }
 }

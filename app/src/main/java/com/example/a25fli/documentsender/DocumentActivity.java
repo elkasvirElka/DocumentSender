@@ -3,6 +3,7 @@ package com.example.a25fli.documentsender;
 
 import android.app.Activity;
 import android.graphics.Color;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -96,15 +97,16 @@ public class DocumentActivity extends Fragment {
                 for (JsonElement element : responseJson) {
                     JsonObject object = element.getAsJsonObject();
 
-                    TextView textView = new TextView(getContext());
+                    final TextView textView = new TextView(getContext());
                     textView.setText(object.get("name").getAsString());
-                    textView.setId(object.get("id") == null ? object.get("id").getAsShort() : 1);
+                    textView.setId(object.get("id") == null ? object.get("id").getAsShort() : 0);
                     textView.setTextColor(Color.WHITE);
 
                     textView.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
                             Intent intent = new Intent(getActivity(), DocumentEditActivity.class);
+                            intent.putExtra("userId:", view.getId());
                             startActivity(intent);
                         }
                     });
@@ -116,7 +118,7 @@ public class DocumentActivity extends Fragment {
                 });
             }
 
-        }, 1);
+        });
     }
 }
 //    protected void onCreate(Bundle savedInstanceState) {
