@@ -65,22 +65,7 @@ public class MainActivity extends AppCompatActivity {
         transaction.replace(R.id.frame_layout, HistoryActivity.newInstance());
         transaction.commit();
 
-        Button registration = findViewById(R.id.registration);
 
-        SharedPreferences dateaboutuser = getSharedPreferences("Save Data", MODE_PRIVATE);
-        String saveddate = dateaboutuser.getString("name", "");
-        if(saveddate.length() > 0){
-            registration.setVisibility(View.GONE);
-        }else{
-            registration.setVisibility(View.VISIBLE);
-        }
-        registration.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, RegistrationActivity.class);
-                startActivity(intent);
-            }
-        });
     }
 
 }
