@@ -17,7 +17,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
-
+    public static Server server = new Server("172.20.10.3", 8080);
     private TextView mTextMessage;
 
     @Override

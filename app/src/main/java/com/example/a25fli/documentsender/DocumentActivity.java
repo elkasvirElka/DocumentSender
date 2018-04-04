@@ -56,7 +56,7 @@ public class DocumentActivity extends Fragment {
         });
         final TextView status = getView().findViewById(R.id.status);
         final GridLayout gridLayout = getView().findViewById(R.id.grid);
-    
+
 
         MainActivity.server.getDocList(new Callback() {
             @Override
@@ -98,8 +98,16 @@ public class DocumentActivity extends Fragment {
 
                     TextView textView = new TextView(getContext());
                     textView.setText(object.get("name").getAsString());
+                    textView.setId(object.get("id") == null ? object.get("id").getAsShort() : 1);
                     textView.setTextColor(Color.WHITE);
 
+                    textView.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Intent intent = new Intent(getActivity(), DocumentEditActivity.class);
+                            startActivity(intent);
+                        }
+                    });
                     gridLayout.addView(textView);
                 }
 
@@ -108,7 +116,7 @@ public class DocumentActivity extends Fragment {
                 });
             }
 
-        });
+        }, 1);
     }
 }
 //    protected void onCreate(Bundle savedInstanceState) {
