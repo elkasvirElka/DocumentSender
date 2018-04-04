@@ -42,9 +42,12 @@ public class MainActivity extends AppCompatActivity {
                             case R.id.navigation_documents:
                                 selectedFragment = DocumentActivity.newInstance();
                                 break;
-//                case R.id.action_item3:
-//                    selectedFragment = ItemThreeFragment.newInstance();
-//                    break;
+                            case R.id.navigation_data:
+                                selectedFragment = AccountActivity.newInstance();
+                                break;
+                            case R.id.navigation_settings:
+                                selectedFragment = SettingsActivity.newInstance();
+                                break;
                         }
 
                         if (selectedFragment == null) {

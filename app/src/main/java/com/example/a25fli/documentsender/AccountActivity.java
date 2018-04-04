@@ -2,7 +2,7 @@ package com.example.a25fli.documentsender;
 
 
 import android.app.Activity;
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
@@ -16,9 +16,11 @@ public class AccountActivity extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation3);
-        //navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
+    }
+    public static AccountActivity newInstance() {
+        AccountActivity fragment = new AccountActivity();
+        return fragment;
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
