@@ -100,7 +100,7 @@ public class DocumentActivity extends Fragment {
                     final TextView textView = new TextView(getContext());
                     textView.setText(object.get("name").getAsString());
                     textView.setId(object.get("id") == null ? object.get("id").getAsShort() : 0);
-                    textView.setTextColor(Color.WHITE);
+                    textView.setTextColor(Color.BLUE);
 
                     textView.setOnClickListener(new View.OnClickListener() {
                         @Override

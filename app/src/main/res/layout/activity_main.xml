@@ -29,9 +29,10 @@
     <FrameLayout
         android:id="@+id/frame_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="510dp"
         android:layout_above="@+id/navigation"
-        android:animateLayoutChanges="true">
+        android:animateLayoutChanges="true"
+        tools:layout_editor_absoluteY="57dp">
 
     </FrameLayout>
 
