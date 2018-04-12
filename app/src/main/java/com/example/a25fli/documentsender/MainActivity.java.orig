@@ -5,18 +5,25 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.TextView;
 
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
 
 public class MainActivity extends AppCompatActivity {
+<<<<<<< Updated upstream
+    public static Server server = new Server("172.20.10.3", 8080);
+=======
     public static Server server = new Server("192.168.0.3", 8080);
+    //public static Server server = new Server("172.20.10.3", 8080);
+>>>>>>> Stashed changes
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+<<<<<<< Updated upstream
+        TextView mTextMessage = findViewById(R.id.message);
 
         AHBottomNavigation bottomNavigation = findViewById(R.id.bottom_navigation);
 
@@ -28,6 +35,11 @@ public class MainActivity extends AppCompatActivity {
                 R.drawable.ic_notifications_black_24dp, R.color.colorPrimaryDark);
         AHBottomNavigationItem item4 = new AHBottomNavigationItem(R.string.navigation_settings,
                 R.drawable.ic_notifications_black_24dp, R.color.colorPrimaryDark);
+=======
+
+        BottomNavigationView bottomNavigationView = (BottomNavigationView)
+                findViewById(R.id.navigation);
+>>>>>>> Stashed changes
 
         bottomNavigation.addItem(item1);
         bottomNavigation.addItem(item2);

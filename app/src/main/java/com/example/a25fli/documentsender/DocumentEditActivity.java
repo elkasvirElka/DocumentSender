@@ -3,13 +3,10 @@ package com.example.a25fli.documentsender;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -17,7 +14,6 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 import java.io.IOException;
-import java.util.List;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -84,14 +80,7 @@ public class DocumentEditActivity extends Activity {
 //                            textView.setId(object.get("id") == null ? object.get("id").getAsShort() : 1);
 //                            textView.setTextColor(Color.WHITE);
 //
-//                            textView.setOnClickListener(new View.OnClickListener() {
-//                                @Override
-//                                public void onClick(View view) {
-//                                    Intent intent = new Intent(getActivity(), DocumentEditActivity.class);
-//                                    intent.setData(Uri.parse("id:"+ textView.getId()));
-//                                    startActivity(intent);
-//                                }
-//                            });
+//
 //                            gridLayout.addView(textView);
                         }
 

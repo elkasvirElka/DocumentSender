@@ -41,4 +41,11 @@ public class Server {
         makeGetRequest(getHttpBuilder().addPathSegment("doc_fields")
                 .addQueryParameter("id", String.valueOf(userId)).build(), callback);
     }
+    public void getDocRequestList(Callback callback, String userId) {
+        if(userId == null || userId == ""){
+            userId = "0";
+        }
+        makeGetRequest(getHttpBuilder().addPathSegment("doc_request")
+                .addQueryParameter("id", String.valueOf(userId)).build(), callback);
+    }
 }

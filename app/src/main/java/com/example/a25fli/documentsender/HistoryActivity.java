@@ -13,7 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.GridLayout;
+import android.widget.GridView;
 import android.widget.TextView;
 
 import com.google.gson.JsonArray;
@@ -57,6 +57,74 @@ public class HistoryActivity extends Fragment {
         }else{
             registration.setVisibility(View.VISIBLE);
         }
+
+        MainActivity.server.getDocRequestList(new Callback() {
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        //не помню до конца
+                    }
+                });
+            }
+
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull final Response response)
+                    throws IOException {
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (response.code() != 200)
+                            return;
+
+                        JsonParser parser = new JsonParser();
+                        ResponseBody body = response.body();
+
+                        if (body == null)
+                            return;
+
+                        String response_string = null;
+                        try {
+                            response_string = body.string();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        JsonArray responseJson = parser.parse(response_string).getAsJsonArray();
+
+                        final GridView grid = getView().findViewById(R.id.DocStatus);
+                        for (JsonElement element : responseJson) {
+                            JsonObject object = element.getAsJsonObject();
+//
+//                            final TextView textView = new TextView(getContext());
+//                            final TextView textView2 = new TextView(getContext());
+//                            textView.setText(object.get("name").getAsString());
+//                            textView.setText(object.get("status").getAsString());
+////                            textView.setId(object.get("id") == null ? object.get("id").getAsShort() : 1);
+//                            textView.setTextColor(Color.BLUE);
+//
+//                            textView.setOnClickListener(new View.OnClickListener() {
+//                                @Override
+//                                public void onClick(View view) {
+//                                    Intent intent = new Intent(getActivity(), DocumentEditActivity.class);
+//                                    intent.setData(Uri.parse("id:"+ textView.getId()));
+//                                    startActivity(intent);
+//                                }
+//                            });
+
+                         //   SimpleAdapter adapter = new SimpleA dapter(
+                           // object
+                           //(textView);
+                          //  gridLayout.addView(textView2);
+                        }
+                        //TODO
+                        //grid.setAdapter();
+                    }
+
+                });
+            }
+
+        }, "0");
         registration.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

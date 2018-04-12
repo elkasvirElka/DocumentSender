@@ -22,7 +22,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <GridLayout
+        <GridView
             android:id="@+id/DocStatus"
             android:layout_width="394dp"
             android:layout_height="150dp"
@@ -37,26 +37,26 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/studBilet">
 
-            <TextView
-                android:layout_width="60dp"
-                android:layout_column="0"
-                android:layout_row="0"
-                android:text="Номер" />
+            <!--<-->
+                <!--android:layout_width="60dp"-->
+                <!--android:layout_column="0"-->
+                <!--android:layout_row="0"-->
+                <!--android:text="Номер" />-->
 
-            <TextView
-                android:layout_width="135dp"
-                android:layout_column="1"
-                android:layout_row="0"
-                android:text="Название документа" />
+            <!--<TextView-->
+                <!--android:layout_width="135dp"-->
+                <!--android:layout_column="1"-->
+                <!--android:layout_row="0"-->
+                <!--android:text="Название документа" />-->
 
-            <TextView
-                android:layout_width="102dp"
-                android:layout_column="2"
-                android:layout_row="0"
-                android:text="Статус документа" />
+            <!--<TextView-->
+                <!--android:layout_width="102dp"-->
+                <!--android:layout_column="2"-->
+                <!--android:layout_row="0"-->
+                <!--android:text="Статус документа" />-->
 
 
-        </GridLayout>
+        </GridView>
 
         <Button
             android:id="@+id/registration"
