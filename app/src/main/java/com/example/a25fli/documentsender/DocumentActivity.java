@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -54,7 +55,8 @@ public class DocumentActivity extends Fragment {
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        status.setText("Ошибка подключения!");
+                        Toast error = Toast.makeText(getActivity(),"Ошибка подключения", Toast.LENGTH_LONG);
+                        error.show();
                     }
                 });
             }

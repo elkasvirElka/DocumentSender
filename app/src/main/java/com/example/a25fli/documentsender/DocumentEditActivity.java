@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -43,7 +44,8 @@ public class DocumentEditActivity extends Activity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                       // status.setText("Ошибка подключения!");
+                        Toast error = Toast.makeText(DocumentEditActivity.this,"Ошибка подключения", Toast.LENGTH_LONG);
+                        error.show();
                     }
                 });
             }
