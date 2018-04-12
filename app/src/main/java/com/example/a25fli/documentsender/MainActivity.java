@@ -1,71 +1,78 @@
 package com.example.a25fli.documentsender;
 
-import android.app.Activity;
-
+import android.graphics.Color;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
+
+import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
+import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
 
 public class MainActivity extends AppCompatActivity {
     public static Server server = new Server("172.20.10.3", 8080);
-    private TextView mTextMessage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mTextMessage = (TextView) findViewById(R.id.message);
-       // BottomNavigationView navigation_items = (BottomNavigationView) findViewById(R.id.navigation_items);
-        //navigation_items.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-        BottomNavigationView bottomNavigationView = (BottomNavigationView)
-                findViewById(R.id.navigation);
+        TextView mTextMessage = findViewById(R.id.message);
 
-        bottomNavigationView.setOnNavigationItemSelectedListener
-                (new BottomNavigationView.OnNavigationItemSelectedListener() {
-                    @Override
-                    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                        Fragment selectedFragment = null;
-                        switch (item.getItemId()) {
-                            case R.id.navigation_home:
-                                selectedFragment = HistoryActivity.newInstance();
-                                break;
-                            case R.id.navigation_documents:
-                                selectedFragment = DocumentActivity.newInstance();
-                                break;
-                            case R.id.navigation_data:
-                                selectedFragment = AccountActivity.newInstance();
-                                break;
-                            case R.id.navigation_settings:
-                                selectedFragment = SettingsActivity.newInstance();
-                                break;
-                        }
+        AHBottomNavigation bottomNavigation = findViewById(R.id.bottom_navigation);
 
-                        if (selectedFragment == null) {
-                            return false;
-                        }
-                        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                        transaction.replace(R.id.frame_layout, selectedFragment);
-                        transaction.commit();
-                        return true;
-                    }
-                });
+        AHBottomNavigationItem item1 = new AHBottomNavigationItem(R.string.title_home,
+                R.drawable.ic_home_black_24dp, R.color.colorPrimaryDark);
+        AHBottomNavigationItem item2 = new AHBottomNavigationItem(R.string.title_data,
+                R.drawable.ic_dashboard_black_24dp, R.color.colorPrimaryDark);
+        AHBottomNavigationItem item3 = new AHBottomNavigationItem(R.string.account,
+                R.drawable.ic_notifications_black_24dp, R.color.colorPrimaryDark);
+        AHBottomNavigationItem item4 = new AHBottomNavigationItem(R.string.navigation_settings,
+                R.drawable.ic_notifications_black_24dp, R.color.colorPrimaryDark);
 
-        //Manually displaying the first fragment - one time only
+        bottomNavigation.addItem(item1);
+        bottomNavigation.addItem(item2);
+        bottomNavigation.addItem(item3);
+        bottomNavigation.addItem(item4);
+
+        bottomNavigation.setDefaultBackgroundColor(getResources()
+                .getColor(R.color.white));
+
+        bottomNavigation.setAccentColor(getResources().getColor(R.color.colorPrimary));
+        bottomNavigation.setInactiveColor(Color.parseColor("#747474"));
+
+        bottomNavigation.setOnTabSelectedListener(new AHBottomNavigation.OnTabSelectedListener() {
+            @Override
+            public boolean onTabSelected(int position, boolean wasSelected) {
+                Fragment selectedFragment = null;
+                switch (position) {
+                    case 0:
+                        selectedFragment = HistoryActivity.newInstance();
+                        break;
+                    case 1:
+                        selectedFragment = DocumentActivity.newInstance();
+                        break;
+                    case 2:
+                        selectedFragment = AccountActivity.newInstance();
+                        break;
+                    case 3:
+                        selectedFragment = SettingsActivity.newInstance();
+                        break;
+                }
+
+                if (selectedFragment == null) {
+                    return false;
+                }
+                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.frame_layout, selectedFragment);
+                transaction.commit();
+                return true;
+            }
+        });
+
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.frame_layout, HistoryActivity.newInstance());
         transaction.commit();
-
-
     }
 
 }
