@@ -2,7 +2,6 @@ package com.example.a25fli.documentsender;
 
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -45,7 +44,6 @@ public class DocumentActivity extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
 
-        final TextView status = getView().findViewById(R.id.status);
         final GridLayout gridLayout = getView().findViewById(R.id.grid);
 
 
@@ -55,8 +53,8 @@ public class DocumentActivity extends Fragment {
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                            Toast error = Toast.makeText(getActivity(),"Ошибка подключения", Toast.LENGTH_LONG);
-                            error.show();
+                        Toast error = Toast.makeText(getActivity(),"Ошибка подключения", Toast.LENGTH_LONG);
+                        error.show();
                     }
                 });
             }
@@ -67,7 +65,6 @@ public class DocumentActivity extends Fragment {
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        status.setText("Успешное подключение!");
                 if (response.code() != 200)
                     return;
 
@@ -85,14 +82,17 @@ public class DocumentActivity extends Fragment {
                         }
                         JsonArray responseJson = parser.parse(response_string).getAsJsonArray();
 
-                for (JsonElement element : responseJson) {
+                        GridLayout.LayoutParams param = new GridLayout.LayoutParams();
+
+                        for (JsonElement element : responseJson) {
                     JsonObject object = element.getAsJsonObject();
 
                     final TextView textView = new TextView(getContext());
                     textView.setText(object.get("name").getAsString());
+                    textView.setTextAppearance(getActivity(), android.R.style.TextAppearance_Medium);
+
                     int a = object.get("id") == null ? object.get("id").getAsShort() : 0;
                     textView.setId(a);
-                    textView.setTextColor(Color.BLUE);
 
 
                     gridLayout.addView(textView);
