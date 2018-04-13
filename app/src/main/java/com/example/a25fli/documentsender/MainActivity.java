@@ -25,9 +25,9 @@ public class MainActivity extends AppCompatActivity {
         AHBottomNavigationItem item2 = new AHBottomNavigationItem(R.string.title_data,
                 R.drawable.ic_dashboard_black_24dp, R.color.colorPrimaryDark);
         AHBottomNavigationItem item3 = new AHBottomNavigationItem(R.string.account,
-                R.drawable.ic_notifications_black_24dp, R.color.colorPrimaryDark);
+                R.drawable.icons_admin, R.color.colorPrimaryDark);
         AHBottomNavigationItem item4 = new AHBottomNavigationItem(R.string.navigation_settings,
-                R.drawable.ic_notifications_black_24dp, R.color.colorPrimaryDark);
+                R.drawable.icons_settings, R.color.colorPrimaryDark);
 
         bottomNavigation.addItem(item1);
         bottomNavigation.addItem(item2);
