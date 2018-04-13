@@ -55,8 +55,8 @@ public class DocumentActivity extends Fragment {
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast error = Toast.makeText(getActivity(),"Ошибка подключения", Toast.LENGTH_LONG);
-                        error.show();
+                            Toast error = Toast.makeText(getActivity(),"Ошибка подключения", Toast.LENGTH_LONG);
+                            error.show();
                     }
                 });
             }

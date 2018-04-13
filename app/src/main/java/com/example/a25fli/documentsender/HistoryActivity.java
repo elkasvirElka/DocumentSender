@@ -1,20 +1,17 @@
 package com.example.a25fli.documentsender;
 
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.GridView;
-import android.widget.TextView;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.google.gson.JsonArray;
@@ -23,6 +20,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -44,6 +42,7 @@ public class HistoryActivity extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         return inflater.inflate(R.layout.history, container, false);
     }
 
@@ -93,36 +92,17 @@ public class HistoryActivity extends Fragment {
                             e.printStackTrace();
                         }
                         JsonArray responseJson = parser.parse(response_string).getAsJsonArray();
-
-                        final GridView grid = getView().findViewById(R.id.DocStatus);
+                        final ListView grid = getView().findViewById(R.id.DocStatus);
+                        ArrayList<myTableClass> data = new ArrayList<myTableClass>();
+                        data.add(new myTableClass("№","Документ", "Статус"));
                         for (JsonElement element : responseJson) {
                             JsonObject object = element.getAsJsonObject();
-//
-//                            final TextView textView = new TextView(getContext());
-//                            final TextView textView2 = new TextView(getContext());
-//                            textView.setText(object.get("name").getAsString());
-//                            textView.setText(object.get("status").getAsString());
-////                            textView.setId(object.get("id") == null ? object.get("id").getAsShort() : 1);
-//                            textView.setTextColor(Color.BLUE);
-//
-//                            textView.setOnClickListener(new View.OnClickListener() {
-//                                @Override
-//                                public void onClick(View view) {
-//                                    Intent intent = new Intent(getActivity(), DocumentEditActivity.class);
-//                                    intent.setData(Uri.parse("id:"+ textView.getId()));
-//                                    startActivity(intent);
-//                                }
-//                            });
 
-                         //   SimpleAdapter adapter = new SimpleA dapter(
-                           // object
-                           //(textView);
-                          //  gridLayout.addView(textView2);
+                            data.add(new myTableClass(object.get("id").getAsString(),object.get("name").getAsString(),
+                                    object.get("state").getAsString()));
                         }
-                        //TODO
-                        //grid.setAdapter();
+                        grid.setAdapter(new MyAdapter(getActivity(),data));
                     }
-
                 });
             }
 
