@@ -26,15 +26,18 @@
             android:textSize="20sp" />
     </android.support.v7.widget.Toolbar>
 
-    <FrameLayout
-        android:id="@+id/frame_layout"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/my_toolbar"
-        android:layout_above="@+id/bottom_navigation"
-        android:animateLayoutChanges="true">
-
-    </FrameLayout>
+        android:layout_above="@+id/bottom_navigation">
+        <FrameLayout
+            android:id="@+id/frame_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:animateLayoutChanges="true">
+        </FrameLayout>
+    </ScrollView>
 
     <com.aurelhubert.ahbottomnavigation.AHBottomNavigation
         android:id="@+id/bottom_navigation"
