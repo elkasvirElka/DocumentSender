@@ -1,6 +1,7 @@
 package com.example.a25fli.documentsender;
 
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -61,7 +62,10 @@ public class HistoryActivity extends Fragment {
         MainActivity.server.getDocRequestList(new Callback() {
             @Override
             public void onFailure(@NonNull Call call, @NonNull IOException e) {
-                getActivity().runOnUiThread(new Runnable() {
+                Activity activity = getActivity();
+                if (activity == null)
+                    return;// ToDo
+                activity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         Toast error = Toast.makeText(getActivity(),"Ошибка подключения", Toast.LENGTH_LONG);
