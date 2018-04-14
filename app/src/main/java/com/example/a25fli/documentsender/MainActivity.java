@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
         AHBottomNavigationItem item1 = new AHBottomNavigationItem(R.string.title_home,
                 R.drawable.ic_home_black_24dp, R.color.colorPrimaryDark);
         AHBottomNavigationItem item2 = new AHBottomNavigationItem(R.string.title_data,
-                R.drawable.icons_docs, R.color.colorPrimaryDark);
+                R.drawable.ic_dashboard_black_24dp, R.color.colorPrimaryDark);
         AHBottomNavigationItem item3 = new AHBottomNavigationItem(R.string.account,
                 R.drawable.icons_admin, R.color.colorPrimaryDark);
         AHBottomNavigationItem item4 = new AHBottomNavigationItem(R.string.navigation_settings,
