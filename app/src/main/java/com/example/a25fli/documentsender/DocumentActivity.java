@@ -32,10 +32,12 @@ public class DocumentActivity extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
+
     public static DocumentActivity newInstance() {
         DocumentActivity fragment = new DocumentActivity();
         return fragment;
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -57,7 +59,7 @@ public class DocumentActivity extends Fragment {
                 activity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast error = Toast.makeText(getActivity(),"Ошибка подключения", Toast.LENGTH_LONG);
+                        Toast error = Toast.makeText(getActivity(), "Ошибка подключения", Toast.LENGTH_LONG);
                         error.show();
                     }
                 });
@@ -66,9 +68,6 @@ public class DocumentActivity extends Fragment {
             @Override
             public void onResponse(@NonNull Call call, @NonNull final Response response)
                     throws IOException {
-                getActivity().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
                 if (response.code() != 200)
                     return;
 
@@ -78,37 +77,43 @@ public class DocumentActivity extends Fragment {
                 if (body == null)
                     return;
 
-                        String response_string = null;
-                        try {
-                            response_string = body.string();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                        JsonArray responseJson = parser.parse(response_string).getAsJsonArray();
+                String response_string = null;
+                try {
+                    response_string = body.string();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
 
+                assert response_string != null;
+
+                final JsonArray responseJson = parser.parse(response_string).getAsJsonArray();
+
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
                         GridLayout.LayoutParams param = new GridLayout.LayoutParams();
 
                         for (JsonElement element : responseJson) {
-                    JsonObject object = element.getAsJsonObject();
+                            JsonObject object = element.getAsJsonObject();
 
-                    final TextView textView = new TextView(getContext());
-                    textView.setText(object.get("name").getAsString());
-                    textView.setTextAppearance(getActivity(), android.R.style.TextAppearance_Medium);
+                            final TextView textView = new TextView(getContext());
+                            textView.setText(object.get("name").getAsString());
+                            textView.setTextAppearance(getActivity(), android.R.style.TextAppearance_Medium);
 
-                    int a = object.get("id") == null ? object.get("id").getAsShort() : 0;
-                    textView.setId(a);
+                            int a = object.get("id") == null ? object.get("id").getAsShort() : 0;
+                            textView.setId(a);
 
 
-                    gridLayout.addView(textView);
-                    textView.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            Intent intent = new Intent(getActivity(), DocumentEditActivity.class);
-                            intent.putExtra("userId:", view.getId());
-                            startActivity(intent);
+                            gridLayout.addView(textView);
+                            textView.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    Intent intent = new Intent(getActivity(), DocumentEditActivity.class);
+                                    intent.putExtra("userId:", view.getId());
+                                    startActivity(intent);
+                                }
+                            });
                         }
-                    });
-                }
 
                     }
 

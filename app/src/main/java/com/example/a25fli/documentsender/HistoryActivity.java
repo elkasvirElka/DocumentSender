@@ -77,25 +77,29 @@ public class HistoryActivity extends Fragment {
             @Override
             public void onResponse(@NonNull Call call, @NonNull final Response response)
                     throws IOException {
+                if (response.code() != 200)
+                    return;
+
+                JsonParser parser = new JsonParser();
+                ResponseBody body = response.body();
+
+                if (body == null)
+                    return;
+
+                String response_string = null;
+                try {
+                    response_string = body.string();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                assert response_string != null;
+
+                final JsonArray responseJson = parser.parse(response_string).getAsJsonArray();
+
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        if (response.code() != 200)
-                            return;
-
-                        JsonParser parser = new JsonParser();
-                        ResponseBody body = response.body();
-
-                        if (body == null)
-                            return;
-
-                        String response_string = null;
-                        try {
-                            response_string = body.string();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                        JsonArray responseJson = parser.parse(response_string).getAsJsonArray();
                         final ListView grid = getView().findViewById(R.id.DocStatus);
                         ArrayList<myTableClass> data = new ArrayList<myTableClass>();
                         data.add(new myTableClass("№","Документ", "Статус"));
