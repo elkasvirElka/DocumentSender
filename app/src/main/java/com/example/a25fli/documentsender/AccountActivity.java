@@ -78,6 +78,13 @@ public class AccountActivity extends Fragment {
         edit.putString("dateofissue", dateofissue.getText().toString());
         edit.putString("codeofissue",codeofissue.getText().toString());
         edit.putString("placeofregistration", placeofregistration.getText().toString());
+        if(man.isChecked()) {
+            edit.putBoolean("sex", true);
+
+        }
+        if(woman.isChecked()){
+            edit.putBoolean("sex", false);
+        }
 
         edit.commit();
         Toast msg = Toast.makeText(getActivity(),"Успешно", Toast.LENGTH_LONG);
@@ -103,6 +110,5 @@ public class AccountActivity extends Fragment {
         dateofissue.setText(dateaboutuser.getString("dateofissue", ""));
         codeofissue.setText(dateaboutuser.getString("codeofissue",""));
         placeofregistration.setText(dateaboutuser.getString("placeofregistration", ""));
-
     }
     }

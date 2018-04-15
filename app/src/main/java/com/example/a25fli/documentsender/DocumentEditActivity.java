@@ -3,10 +3,14 @@ package com.example.a25fli.documentsender;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.JsonArray;
@@ -27,15 +31,7 @@ public class DocumentEditActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.document_edit);
-        Button edit_document = findViewById(R.id.show_document);
-
-        edit_document.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(DocumentEditActivity.this, DocumentShowActivity.class);
-                startActivity(intent);
-            }
-        });
+//
         String myId = getIntent().getStringExtra("userId");
 
         MainActivity.server.getDocEditFields(new Callback() {
@@ -44,7 +40,7 @@ public class DocumentEditActivity extends Activity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast error = Toast.makeText(DocumentEditActivity.this,"Ошибка подключения", Toast.LENGTH_LONG);
+                        Toast error = Toast.makeText(DocumentEditActivity.this, "Ошибка подключения", Toast.LENGTH_LONG);
                         error.show();
                     }
                 });
@@ -56,7 +52,7 @@ public class DocumentEditActivity extends Activity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                      // status.setText("Успешное подключение!");
+                        // status.setText("Успешное подключение!");
                         if (response.code() != 200)
                             return;
 
@@ -73,18 +69,36 @@ public class DocumentEditActivity extends Activity {
                             e.printStackTrace();
                         }
                         JsonArray responseJson = parser.parse(response_string).getAsJsonArray();
+                        LinearLayout myToolbar = findViewById(R.id.my_toolbar);
+                        SharedPreferences dateaboutuser = getSharedPreferences("Save Data", MODE_PRIVATE);
 
                         for (JsonElement element : responseJson) {
                             JsonObject object = element.getAsJsonObject();
 //
-//                            final TextView textView = new TextView(getContext());
-//                            textView.setText(object.get("name").getAsString());
-//                            textView.setId(object.get("id") == null ? object.get("id").getAsShort() : 1);
+                            String value = dateaboutuser.getString(object.get("type").getAsString(), "");
+                            final TextView textView = new TextView(DocumentEditActivity.this);
+                            textView.setText(object.get("name").getAsString());
+                            myToolbar.addView(textView);
+                            final EditText editText = new EditText(DocumentEditActivity.this);
+                            editText.setText(value);
+                            myToolbar.addView(editText);
+                            textView.setId(object.get("id") == null ? object.get("id").getAsShort() : 1);
 //                            textView.setTextColor(Color.WHITE);
 //
 //
 //                            gridLayout.addView(textView);
                         }
+                        final Button showDocument = new Button(DocumentEditActivity.this);
+                        showDocument.setText("Предпросмотр документ");
+                        showDocument.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                Intent intent = new Intent(DocumentEditActivity.this, DocumentShowActivity.class);
+                                startActivity(intent);
+                            }
+                        });
+                        myToolbar.addView(showDocument);
+
 
                     }
 

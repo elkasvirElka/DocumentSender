@@ -98,7 +98,7 @@ public class DocumentActivity extends Fragment {
 
                             final TextView textView = new TextView(getContext());
                             textView.setText(object.get("name").getAsString());
-                            textView.setTextAppearance(getActivity(), android.R.style.TextAppearance_Medium);
+                            textView.setTextAppearance(getActivity(), android.R.style.TextAppearance_Large);
 
                             int a = object.get("id") == null ? object.get("id").getAsShort() : 0;
                             textView.setId(a);
