@@ -10,7 +10,9 @@ import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
 
 public class MainActivity extends AppCompatActivity {
-    public static Server server = new Server("193.105.65.66", 1025);
+
+  //  public static Server server = new Server("193.105.65.66", 1025);
+    public static Server server = new Server("192.168.3.4", 8080);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

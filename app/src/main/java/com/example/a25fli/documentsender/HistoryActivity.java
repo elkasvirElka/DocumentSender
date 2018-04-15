@@ -106,8 +106,8 @@ public class HistoryActivity extends Fragment {
                         for (JsonElement element : responseJson) {
                             JsonObject object = element.getAsJsonObject();
 
-                            data.add(new myTableClass(object.get("id").getAsString(),object.get("name").getAsString(),
-                                    object.get("state").getAsString()));
+                            data.add(new myTableClass(object.get("id").getAsString(),object.get("doc_id").getAsString(),
+                                    object.get("state_id").getAsString()));
                         }
                         grid.setAdapter(new MyAdapter(getActivity(),data));
                     }
