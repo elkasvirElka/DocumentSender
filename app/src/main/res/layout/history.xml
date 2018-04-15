@@ -1,74 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:orientation="vertical">
 
-    <LinearLayout
+    <android.support.v7.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp">
 
         <ImageView
             android:id="@+id/studBilet"
             android:layout_width="match_parent"
-            android:layout_height="243dp"
-            android:layout_marginBottom="8dp"
-            android:layout_marginTop="16dp"
-            android:src="@drawable/stud"
-            app:layout_constraintBottom_toTopOf="@+id/DocStatus"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_height="246dp"
+            android:layout_margin="5dp"
+            android:contentDescription="stud bilet"
+            android:scaleType="fitStart"
+            android:src="@drawable/stud" />
+    </android.support.v7.widget.CardView>
 
-        <ListView
-            android:id="@+id/DocStatus"
-            android:layout_width="394dp"
-            android:layout_height="150dp"
-            android:layout_marginBottom="21dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:columnCount="3"
-            android:visibility="visible"
-            app:layout_constraintBottom_toTopOf="@+id/registration"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/studBilet">
-            <!--<TableRow-->
-                <!--style="@style/AppTheme"-->
-                <!--xmlns:android="http://schemas.android.com/apk/res/android">-->
-                <!--<TextView-->
-                    <!--style="@style/AppTheme"-->
-                    <!--android:id="@+id/attrib_name"-->
-                    <!--android:textStyle="bold"/>-->
-                <!--<TextView-->
-                    <!--style="@style/AppTheme"-->
-                    <!--android:id="@+id/attrib_value"-->
-                    <!--android:gravity="right"-->
-                    <!--android:textStyle="normal"/>-->
-            <!--</TableRow>-->
-        </ListView>
 
-        <Button
-            android:id="@+id/registration"
-            android:layout_width="97dp"
-            android:layout_height="38dp"
-            android:layout_marginBottom="81dp"
-            android:layout_marginEnd="208dp"
-            android:text="Регистрация"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/DocStatus" />
+    <ListView
+        android:id="@+id/DocStatus"
+        android:layout_width="394dp"
+        android:layout_height="150dp"
+        android:layout_marginBottom="21dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:columnCount="3"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/registration"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/studBilet">
+        <!--<TableRow-->
+        <!--style="@style/AppTheme"-->
+        <!--xmlns:android="http://schemas.android.com/apk/res/android">-->
+        <!--<TextView-->
+        <!--style="@style/AppTheme"-->
+        <!--android:id="@+id/attrib_name"-->
+        <!--android:textStyle="bold"/>-->
+        <!--<TextView-->
+        <!--style="@style/AppTheme"-->
+        <!--android:id="@+id/attrib_value"-->
+        <!--android:gravity="right"-->
+        <!--android:textStyle="normal"/>-->
+        <!--</TableRow>-->
+    </ListView>
 
-        <ScrollView
-            android:visibility="gone"
+    <Button
+        android:id="@+id/registration"
+        android:layout_width="97dp"
+        android:layout_height="38dp"
+        android:layout_marginBottom="81dp"
+        android:layout_marginEnd="208dp"
+        android:text="Регистрация"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/DocStatus" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <TableLayout
+            android:id="@+id/grid"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <TableLayout
-                android:id="@+id/grid"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" >
-            </TableLayout>
-        </ScrollView>
-    </LinearLayout>
-</RelativeLayout>
+            android:layout_height="wrap_content" />
+    </ScrollView>
+</LinearLayout>
