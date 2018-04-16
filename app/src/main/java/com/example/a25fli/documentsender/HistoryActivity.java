@@ -4,6 +4,7 @@ package com.example.a25fli.documentsender;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -12,7 +13,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.JsonArray;
@@ -31,7 +34,7 @@ import okhttp3.ResponseBody;
 import static android.content.Context.MODE_PRIVATE;
 
 public class HistoryActivity extends Fragment {
-
+    static final int GALLERY_REQUEST = 1;
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -47,17 +50,32 @@ public class HistoryActivity extends Fragment {
         return inflater.inflate(R.layout.history, container, false);
     }
 
+
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        Button registration = getView().findViewById(R.id.registration);
-
         SharedPreferences dateaboutuser = this.getActivity().getSharedPreferences("Save Data", MODE_PRIVATE);
+
+        Button registration = getView().findViewById(R.id.registration);
+        TextView stud_ID = getView().findViewById(R.id.stud_ID);
+        stud_ID.setText(dateaboutuser.getString("numberofID",""));
+        TextView stud_name = getView().findViewById(R.id.stud_name);
+        stud_name.setText(dateaboutuser.getString("name",""));
+        TextView stud_surname = getView().findViewById(R.id.stud_surname);
+        stud_surname.setText(dateaboutuser.getString("surname",""));
+        TextView stud_patronymic = getView().findViewById(R.id.stud_patronymic);
+        stud_patronymic.setText(dateaboutuser.getString("patronymic", ""));
+        TextView stud_fac = getView().findViewById(R.id.stud_fac);
+        stud_fac.setText(dateaboutuser.getString("institute",""));
+        TextView stud_form = getView().findViewById(R.id.stud_form);
+        stud_form.setText(dateaboutuser.getString("formofeducation",""));
         String saveddate = dateaboutuser.getString("name", "");
         if(saveddate.length() > 0){
             registration.setVisibility(View.GONE);
         }else{
             registration.setVisibility(View.VISIBLE);
         }
+
+        TextView download = getView().findViewById(R.id.download);
 
         MainActivity.server.getDocRequestList(new Callback() {
             @Override
@@ -113,6 +131,7 @@ public class HistoryActivity extends Fragment {
                     }
                 });
             }
+
 
         }, "0");
         registration.setOnClickListener(new View.OnClickListener() {

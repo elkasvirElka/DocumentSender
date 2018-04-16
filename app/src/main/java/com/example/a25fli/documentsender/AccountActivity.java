@@ -21,7 +21,7 @@ public class AccountActivity extends Fragment {
     SharedPreferences dateaboutuser;
     EditText name, surname, patronymic, dateofbirth, institute, numberofgroup,
             numberofID, placeofbirth, seriesandnumber, placeofissue, dateofissue,
-            codeofissue, placeofregistration, dateofstart, dateoffinish;
+            codeofissue, placeofregistration, dateofstart, dateoffinish, formofeducation;
     RadioButton man, woman;
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -46,6 +46,7 @@ public class AccountActivity extends Fragment {
         institute = getView().findViewById(R.id.institute);
         numberofgroup = getView().findViewById(R.id.numberofgroup);
         numberofID = getView().findViewById(R.id.numberofID);
+        formofeducation = getView().findViewById(R.id.formofeducation);
         dateofstart = getView().findViewById(R.id.dateofstart);
         dateoffinish = getView().findViewById(R.id.dateoffinish);
         placeofbirth = getView().findViewById(R.id.placeofbirth);
@@ -76,6 +77,7 @@ public class AccountActivity extends Fragment {
         edit.putString("institute", institute.getText().toString());
         edit.putString("numberofgroup", numberofgroup.getText().toString());
         edit.putString("numberofID",numberofID.getText().toString());
+        edit.putString("formofeducation",formofeducation.getText().toString());
         edit.putString("dateofstart",dateofstart.getText().toString());
         edit.putString("dateoffinish", dateoffinish.getText().toString());
         edit.putString("placeofbirth",placeofbirth.getText().toString());
@@ -109,6 +111,7 @@ public class AccountActivity extends Fragment {
         institute.setText(dateaboutuser.getString("institute", ""));
         numberofgroup.setText(dateaboutuser.getString("numberofgroup", ""));
         numberofID.setText(dateaboutuser.getString("numberofID", ""));
+        formofeducation.setText(dateaboutuser.getString("formofeducation",""));
         dateofstart.setText(dateaboutuser.getString("dateofstart",""));
         dateoffinish.setText(dateaboutuser.getString("dateoffinish",""));
         placeofbirth.setText(dateaboutuser.getString("placeofbirth", ""));

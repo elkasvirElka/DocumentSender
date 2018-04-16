@@ -1,25 +1,151 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
     <android.support.v7.widget.CardView
-        android:layout_width="match_parent"
+        android:layout_width="330dp"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp">
+        android:layout_gravity="center_horizontal"
+        ><android.support.constraint.ConstraintLayout
+        android:layout_width="330dp"
+        android:layout_height="wrap_content">
 
-
-            <ImageView
+        <ImageView
             android:id="@+id/studBilet"
-            android:layout_width="match_parent"
+            android:layout_width="330dp"
+            android:layout_gravity="center_horizontal"
             android:layout_height="wrap_content"
             android:adjustViewBounds="true"
-            android:layout_margin="5dp"
             android:contentDescription="stud bilet"
             android:scaleType="fitStart"
             android:src="@drawable/stud" />
+
+        <TextView
+            android:id="@+id/stud_form"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="184dp"
+            android:layout_marginTop="132dp"
+            android:textSize="10dp"
+            app:layout_constraintStart_toStartOf="@+id/studBilet"
+            app:layout_constraintTop_toTopOf="@+id/studBilet" />
+
+        <TextView
+            android:id="@+id/stud_ID"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="237dp"
+            android:layout_marginTop="60dp"
+            android:textSize="13dp"
+            app:layout_constraintStart_toStartOf="@+id/studBilet"
+            app:layout_constraintTop_toTopOf="@+id/studBilet" />
+
+        <TextView
+            android:id="@+id/stud_surname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="155dp"
+            android:layout_marginTop="78dp"
+            android:textSize="10dp"
+            app:layout_constraintStart_toStartOf="@+id/studBilet"
+            app:layout_constraintTop_toTopOf="@+id/studBilet" />
+
+        <TextView
+            android:id="@+id/stud_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="134dp"
+            android:layout_marginTop="91dp"
+            android:textSize="10dp"
+            app:layout_constraintStart_toStartOf="@+id/studBilet"
+            app:layout_constraintTop_toTopOf="@+id/studBilet" />
+
+        <TextView
+            android:id="@+id/stud_patronymic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="155dp"
+            android:layout_marginTop="105dp"
+            android:textSize="10dp"
+            app:layout_constraintStart_toStartOf="@+id/studBilet"
+            app:layout_constraintTop_toTopOf="@+id/studBilet" />
+
+        <TextView
+            android:id="@+id/stud_fac"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="160dp"
+            android:layout_marginTop="118dp"
+            android:textSize="10dp"
+            app:layout_constraintStart_toStartOf="@+id/studBilet"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/KSTU"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="28dp"
+            android:layout_marginTop="27dp"
+            android:text="Казанский национальный исследовательский технический университет"
+            android:textSize="8dp"
+            app:layout_constraintEnd_toEndOf="@+id/studBilet"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/KAI"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="125dp"
+            android:layout_marginTop="42dp"
+            android:text="имени А.Н. Туполева - КАИ"
+            android:textSize="8dp"
+            app:layout_constraintEnd_toEndOf="@+id/studBilet"
+            app:layout_constraintTop_toTopOf="@+id/studBilet" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="93dp"
+            android:layout_height="123dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="14dp"
+            android:layout_marginTop="78dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/studBilet"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/studBilet"
+            app:layout_constraintTop_toTopOf="@+id/studBilet"
+            app:layout_constraintVertical_bias="0.0"
+            app:srcCompat="@android:color/white" />
+
+        <TextView
+            android:id="@+id/download"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="133dp"
+            android:text="Загрузить фотографию"
+            android:textColor="#000080"
+            android:textSize="6dp"
+            app:layout_constraintEnd_toEndOf="@+id/studBilet"
+            app:layout_constraintHorizontal_bias="0.04"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/studBilet" />
+
+
+    </android.support.constraint.ConstraintLayout>
+
+
+
+
+
+
+
 
 
     </android.support.v7.widget.CardView>

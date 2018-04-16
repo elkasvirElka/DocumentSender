@@ -14,7 +14,7 @@ public class RegistrationActivity extends Activity implements View.OnClickListen
     SharedPreferences dateaboutuser;
     EditText name, surname, patronymic, dateofbirth, institute, numberofgroup,
     numberofID, placeofbirth, seriesandnumber, placeofissue, dateofissue,
-    codeofissue, placeofregistration, dateofstart, dateoffinish;
+    codeofissue, placeofregistration, dateofstart, dateoffinish, formofeducation;
     RadioButton man, woman;
 
     public RegistrationActivity() {
@@ -34,6 +34,7 @@ public class RegistrationActivity extends Activity implements View.OnClickListen
         institute = findViewById(R.id.institute);
         numberofgroup = findViewById(R.id.numberofgroup);
         numberofID = findViewById(R.id.numberofID);
+        formofeducation = findViewById(R.id.formofeducation);
         dateofstart = findViewById(R.id.dateofstart);
         dateoffinish = findViewById(R.id.dateoffinish);
         placeofbirth = findViewById(R.id.placeofbirth);
@@ -61,6 +62,7 @@ public class RegistrationActivity extends Activity implements View.OnClickListen
         edit.putString("institute", institute.getText().toString());
         edit.putString("numberofgroup", numberofgroup.getText().toString());
         edit.putString("numberofID",numberofID.getText().toString());
+        edit.putString("formofeducation",formofeducation.getText().toString());
         edit.putString("dateofstart", dateofstart.getText().toString());
         edit.putString("dateoffinish", dateoffinish.getText().toString());
         edit.putString("placeofbirth",placeofbirth.getText().toString());
@@ -89,6 +91,7 @@ public class RegistrationActivity extends Activity implements View.OnClickListen
         institute.setText(dateaboutuser.getString("institute", ""));
         numberofgroup.setText(dateaboutuser.getString("numberofgroup", ""));
         numberofID.setText(dateaboutuser.getString("numberofID", ""));
+        formofeducation.setText(dateaboutuser.getString("formofeducation",""));
         dateofstart.setText(dateaboutuser.getString("dateofstart",""));
         dateoffinish.setText(dateaboutuser.getString("dateoffinish",""));
         placeofbirth.setText(dateaboutuser.getString("placeofbirth", ""));

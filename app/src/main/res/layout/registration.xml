@@ -118,6 +118,15 @@
                 android:inputType="number" />
 
             <EditText
+                android:id="@+id/formofeducation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Форма обучения"
+                android:inputType="textPersonName"
+                android:text="Name" />
+
+            <EditText
                 android:id="@+id/dateofstart"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
