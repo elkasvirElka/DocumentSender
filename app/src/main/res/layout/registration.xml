@@ -117,6 +117,22 @@
                 android:hint="Номер студенческого билета"
                 android:inputType="number" />
 
+            <EditText
+                android:id="@+id/dateofstart"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Дата поступления"
+                android:inputType="date" />
+
+            <EditText
+                android:id="@+id/dateoffinish"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Дата окончания обучения"
+                android:inputType="date" />
+
             <TextView
                 android:id="@+id/textView"
                 android:layout_width="match_parent"

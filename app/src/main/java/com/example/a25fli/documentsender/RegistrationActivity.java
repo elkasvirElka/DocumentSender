@@ -14,7 +14,7 @@ public class RegistrationActivity extends Activity implements View.OnClickListen
     SharedPreferences dateaboutuser;
     EditText name, surname, patronymic, dateofbirth, institute, numberofgroup,
     numberofID, placeofbirth, seriesandnumber, placeofissue, dateofissue,
-    codeofissue, placeofregistration;
+    codeofissue, placeofregistration, dateofstart, dateoffinish;
     RadioButton man, woman;
 
     public RegistrationActivity() {
@@ -34,6 +34,8 @@ public class RegistrationActivity extends Activity implements View.OnClickListen
         institute = findViewById(R.id.institute);
         numberofgroup = findViewById(R.id.numberofgroup);
         numberofID = findViewById(R.id.numberofID);
+        dateofstart = findViewById(R.id.dateofstart);
+        dateoffinish = findViewById(R.id.dateoffinish);
         placeofbirth = findViewById(R.id.placeofbirth);
         seriesandnumber = findViewById(R.id.seriesandnumber);
         placeofissue = findViewById(R.id.placeofissue);
@@ -41,27 +43,13 @@ public class RegistrationActivity extends Activity implements View.OnClickListen
         codeofissue = findViewById(R.id.codeofissue);
         placeofregistration = findViewById(R.id.placeofregistration);
         Button savedatebutton = findViewById(R.id.savedate);
-        loaddate();
+
         savedatebutton.setOnClickListener((View.OnClickListener) this);
 
         man = findViewById(R.id.sex_man);
         woman = findViewById(R.id.sex_woman);
-        man.setOnClickListener(sex);
-        woman.setOnClickListener(sex);
+        loaddate();
     }
-    View.OnClickListener sex = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            RadioButton rb = (RadioButton)v;
-            switch (rb.getId()) {
-                case R.id.sex_man: woman.setChecked(false);
-                break;
-                case R.id.sex_woman: man.setChecked(false);
-                break;
-                default: break;
-            }
-        }
-    };
 
     private void savedate(){
         dateaboutuser = getSharedPreferences("Save Data", MODE_PRIVATE);
@@ -73,6 +61,8 @@ public class RegistrationActivity extends Activity implements View.OnClickListen
         edit.putString("institute", institute.getText().toString());
         edit.putString("numberofgroup", numberofgroup.getText().toString());
         edit.putString("numberofID",numberofID.getText().toString());
+        edit.putString("dateofstart", dateofstart.getText().toString());
+        edit.putString("dateoffinish", dateoffinish.getText().toString());
         edit.putString("placeofbirth",placeofbirth.getText().toString());
         edit.putString("seriesandnumber", seriesandnumber.getText().toString());
         edit.putString("placeofissue", placeofissue.getText().toString());
@@ -80,11 +70,11 @@ public class RegistrationActivity extends Activity implements View.OnClickListen
         edit.putString("codeofissue",codeofissue.getText().toString());
         edit.putString("placeofregistration", placeofregistration.getText().toString());
         if(man.isChecked()) {
-            edit.putBoolean("sex", true);
+            edit.putString("sex", "М");
 
         }
         if(woman.isChecked()){
-            edit.putBoolean("sex", false);
+            edit.putString("sex", "Ж");
         }
             edit.commit();
     }
@@ -99,17 +89,25 @@ public class RegistrationActivity extends Activity implements View.OnClickListen
         institute.setText(dateaboutuser.getString("institute", ""));
         numberofgroup.setText(dateaboutuser.getString("numberofgroup", ""));
         numberofID.setText(dateaboutuser.getString("numberofID", ""));
+        dateofstart.setText(dateaboutuser.getString("dateofstart",""));
+        dateoffinish.setText(dateaboutuser.getString("dateoffinish",""));
         placeofbirth.setText(dateaboutuser.getString("placeofbirth", ""));
         seriesandnumber.setText(dateaboutuser.getString("seriesandnumber", ""));
         placeofissue.setText(dateaboutuser.getString("placeofissue", ""));
         dateofissue.setText(dateaboutuser.getString("dateofissue", ""));
         codeofissue.setText(dateaboutuser.getString("codeofissue",""));
         placeofregistration.setText(dateaboutuser.getString("placeofregistration", ""));
-
+        if(dateaboutuser.getString("sex", "")=="М"){
+            man.setChecked(true);
+        }
+        if(dateaboutuser.getString("sex","")=="Ж"){
+            woman.setChecked(true);
+        }
     }
 
     @Override
     public void onClick(View view) {
         savedate();
+
     }
 }

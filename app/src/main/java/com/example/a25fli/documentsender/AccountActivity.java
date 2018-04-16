@@ -21,7 +21,7 @@ public class AccountActivity extends Fragment {
     SharedPreferences dateaboutuser;
     EditText name, surname, patronymic, dateofbirth, institute, numberofgroup,
             numberofID, placeofbirth, seriesandnumber, placeofissue, dateofissue,
-            codeofissue, placeofregistration;
+            codeofissue, placeofregistration, dateofstart, dateoffinish;
     RadioButton man, woman;
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -46,6 +46,8 @@ public class AccountActivity extends Fragment {
         institute = getView().findViewById(R.id.institute);
         numberofgroup = getView().findViewById(R.id.numberofgroup);
         numberofID = getView().findViewById(R.id.numberofID);
+        dateofstart = getView().findViewById(R.id.dateofstart);
+        dateoffinish = getView().findViewById(R.id.dateoffinish);
         placeofbirth = getView().findViewById(R.id.placeofbirth);
         seriesandnumber = getView().findViewById(R.id.seriesandnumber);
         placeofissue = getView().findViewById(R.id.placeofissue);
@@ -53,6 +55,8 @@ public class AccountActivity extends Fragment {
         codeofissue = getView().findViewById(R.id.codeofissue);
         placeofregistration = getView().findViewById(R.id.placeofregistration);
         Button savedatebutton = getView().findViewById(R.id.savedate);
+        man = getView().findViewById(R.id.sex_man);
+        woman = getView().findViewById(R.id.sex_woman);
         savedatebutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -72,6 +76,8 @@ public class AccountActivity extends Fragment {
         edit.putString("institute", institute.getText().toString());
         edit.putString("numberofgroup", numberofgroup.getText().toString());
         edit.putString("numberofID",numberofID.getText().toString());
+        edit.putString("dateofstart",dateofstart.getText().toString());
+        edit.putString("dateoffinish", dateoffinish.getText().toString());
         edit.putString("placeofbirth",placeofbirth.getText().toString());
         edit.putString("seriesandnumber", seriesandnumber.getText().toString());
         edit.putString("placeofissue", placeofissue.getText().toString());
@@ -79,11 +85,11 @@ public class AccountActivity extends Fragment {
         edit.putString("codeofissue",codeofissue.getText().toString());
         edit.putString("placeofregistration", placeofregistration.getText().toString());
         if(man.isChecked()) {
-            edit.putBoolean("sex", true);
+            edit.putString("sex", "М");
 
         }
         if(woman.isChecked()){
-            edit.putBoolean("sex", false);
+            edit.putString("sex", "Ж");
         }
 
         edit.commit();
@@ -96,19 +102,29 @@ public class AccountActivity extends Fragment {
     private void loaddate(){
         dateaboutuser = getActivity().getSharedPreferences("Save Data", MODE_PRIVATE);
 
-        String saveddate = dateaboutuser.getString("name", "");
-        name.setText(saveddate);
+        name.setText(dateaboutuser.getString("name", ""));
         surname.setText(dateaboutuser.getString("surname", ""));
         patronymic.setText(dateaboutuser.getString("patronymic",""));
         dateofbirth.setText(dateaboutuser.getString("dateofbirth", ""));
         institute.setText(dateaboutuser.getString("institute", ""));
         numberofgroup.setText(dateaboutuser.getString("numberofgroup", ""));
         numberofID.setText(dateaboutuser.getString("numberofID", ""));
+        dateofstart.setText(dateaboutuser.getString("dateofstart",""));
+        dateoffinish.setText(dateaboutuser.getString("dateoffinish",""));
         placeofbirth.setText(dateaboutuser.getString("placeofbirth", ""));
         seriesandnumber.setText(dateaboutuser.getString("seriesandnumber", ""));
         placeofissue.setText(dateaboutuser.getString("placeofissue", ""));
         dateofissue.setText(dateaboutuser.getString("dateofissue", ""));
         codeofissue.setText(dateaboutuser.getString("codeofissue",""));
         placeofregistration.setText(dateaboutuser.getString("placeofregistration", ""));
+
+
+        switch (dateaboutuser.getString("sex","")){
+            case "М": man.setChecked(true); break;
+            case "Ж": woman.setChecked(true); break;
+            default: break;
+        }
+
+
     }
     }
