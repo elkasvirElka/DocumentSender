@@ -108,6 +108,7 @@ public class RegistrationActivity extends Activity implements View.OnClickListen
     @Override
     public void onClick(View view) {
         savedate();
+        this.finish();
 
     }
 }
