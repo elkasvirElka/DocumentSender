@@ -10,7 +10,8 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp">
 
-        <ImageView
+
+            <ImageView
             android:id="@+id/studBilet"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -19,6 +20,8 @@
             android:contentDescription="stud bilet"
             android:scaleType="fitStart"
             android:src="@drawable/stud" />
+
+
     </android.support.v7.widget.CardView>
 
     <android.support.v7.widget.CardView
@@ -31,20 +34,23 @@
             android:layout_height="wrap_content"
             android:visibility="visible"
             android:layout_margin="5dp">
+
         </ListView>
     </android.support.v7.widget.CardView>
 
 
-    <Button
-        android:id="@+id/registration"
-        android:layout_width="wrap_content"
-        android:layout_height="38dp"
-        android:layout_marginBottom="81dp"
-        android:layout_marginEnd="208dp"
-        android:text="Регистрация"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/DocStatus" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/registration"
+            android:layout_width="wrap_content"
+            android:layout_height="38dp"
+            android:text="Регистрация"
+             />
+    </LinearLayout>
 
     <ScrollView
         android:layout_width="match_parent"

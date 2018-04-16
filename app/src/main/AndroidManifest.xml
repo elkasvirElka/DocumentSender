@@ -12,6 +12,7 @@
         <activity
             android:name=".MainActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:screenOrientation="portrait"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,12 +20,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".DocumentEditActivity">
+        <activity android:name=".DocumentEditActivity"
+            android:screenOrientation="portrait">
         </activity>
         <activity android:name=".RegistrationActivity"
-            android:noHistory="true">
+            android:noHistory="true"
+            android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".DocumentShowActivity">
+        <activity android:name=".DocumentShowActivity"
+            android:screenOrientation="portrait">
         </activity>
     </application>
 
