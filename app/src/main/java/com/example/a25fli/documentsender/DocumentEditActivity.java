@@ -31,8 +31,11 @@ public class DocumentEditActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.document_edit);
-//
-        String myId = getIntent().getStringExtra("userId");
+        String myId = "0";
+         Bundle extras = getIntent().getExtras();
+        if(extras != null) {
+            myId = extras.get("docId").toString();
+        }
 
         MainActivity.server.getDocEditFields(new Callback() {
             @Override
@@ -75,18 +78,13 @@ public class DocumentEditActivity extends Activity {
                         for (JsonElement element : responseJson) {
                             JsonObject object = element.getAsJsonObject();
 //
-                            String value = dateaboutuser.getString(object.get("type").getAsString(), "");
+                            String value = dateaboutuser.getString(object.get("field_name").getAsString(), "");
                             final TextView textView = new TextView(DocumentEditActivity.this);
                             textView.setText(object.get("name").getAsString());
                             myToolbar.addView(textView);
                             final EditText editText = new EditText(DocumentEditActivity.this);
                             editText.setText(value);
                             myToolbar.addView(editText);
-                            textView.setId(object.get("id") == null ? object.get("id").getAsShort() : 1);
-//                            textView.setTextColor(Color.WHITE);
-//
-//
-//                            gridLayout.addView(textView);
                         }
                         final Button showDocument = new Button(DocumentEditActivity.this);
                         showDocument.setText("Предпросмотр документ");

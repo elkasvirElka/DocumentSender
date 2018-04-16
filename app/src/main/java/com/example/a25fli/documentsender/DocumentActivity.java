@@ -100,7 +100,7 @@ public class DocumentActivity extends Fragment {
                             textView.setText(object.get("name").getAsString());
                             textView.setTextAppearance(getActivity(), android.R.style.TextAppearance_Large);
 
-                            int a = object.get("id") == null ? object.get("id").getAsShort() : 0;
+                            int a = object.get("id") != null ? object.get("id").getAsShort() : 0;
                             textView.setId(a);
 
 
@@ -109,7 +109,7 @@ public class DocumentActivity extends Fragment {
                                 @Override
                                 public void onClick(View view) {
                                     Intent intent = new Intent(getActivity(), DocumentEditActivity.class);
-                                    intent.putExtra("userId:", view.getId());
+                                    intent.putExtra("docId", view.getId());
                                     startActivity(intent);
                                 }
                             });
