@@ -202,7 +202,7 @@
 
             <Button
                 android:id="@+id/savedate"
-                style="@style/Widget.AppCompat.Button.Colored"
+                android:background="@drawable/roundbtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"

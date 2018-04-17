@@ -5,7 +5,9 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -24,6 +26,8 @@ import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
+
+import static com.example.a25fli.documentsender.R.drawable.roundbtn;
 
 
 public class DocumentEditActivity extends Activity {
@@ -88,6 +92,8 @@ public class DocumentEditActivity extends Activity {
                         }
                         final Button showDocument = new Button(DocumentEditActivity.this);
                         showDocument.setText("Предпросмотр документ");
+                        showDocument.setBackground(getResources().getDrawable(R.drawable.roundbtn));
+                        showDocument.setTextColor(getResources().getColor(R.color.white));
                         showDocument.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
