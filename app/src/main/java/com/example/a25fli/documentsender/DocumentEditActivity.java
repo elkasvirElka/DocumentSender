@@ -5,10 +5,9 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
-import android.support.v4.content.ContextCompat;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -21,13 +20,13 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
-
-import static com.example.a25fli.documentsender.R.drawable.roundbtn;
 
 
 public class DocumentEditActivity extends Activity {
@@ -97,8 +96,7 @@ public class DocumentEditActivity extends Activity {
                         showDocument.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                Intent intent = new Intent(DocumentEditActivity.this, DocumentShowActivity.class);
-                                startActivity(intent);
+                                onClickShowDoc();
                             }
                         });
                         myToolbar.addView(showDocument);
@@ -111,4 +109,84 @@ public class DocumentEditActivity extends Activity {
 
         }, myId);
     }
+    private void onClickShowDoc() {
+        LinearLayout myToolbar = findViewById(R.id.my_toolbar);
+        Map<String, String> items  = getAllChildElements(myToolbar);
+
+        MainActivity.server.sendPrefile(new Callback() {
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast error = Toast.makeText(DocumentEditActivity.this, "Ошибка подключения", Toast.LENGTH_LONG);
+                        error.show();
+                    }
+                });
+            }
+
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull final Response response)
+                    throws IOException {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        // status.setText("Успешное подключение!");
+                        if (response.code() != 200)
+                            return;
+
+                        JsonParser parser = new JsonParser();
+                        ResponseBody body = response.body();
+
+                        if (body == null)
+                            return;
+
+                        String response_string = null;
+                        try {
+                            response_string = body.string();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        JsonArray responseJson = parser.parse(response_string).getAsJsonArray();
+                        LinearLayout myToolbar = findViewById(R.id.my_toolbar);
+                        SharedPreferences dateaboutuser = getSharedPreferences("Save Data", MODE_PRIVATE);
+
+//TODO тут еще передаем картинку
+                        Intent intent = new Intent(DocumentEditActivity.this, DocumentShowActivity.class);
+                        startActivity(intent);
+
+                    }
+
+                });
+            }
+
+        }, items);
+    }
+    public static final Map<String, String> getAllChildElements(ViewGroup layoutCont) {
+        if (layoutCont == null) return new HashMap<String, String>();
+        Map<String, String> items = new HashMap<String, String>();
+        final int mCount = layoutCont.getChildCount();
+
+        // Loop through all of the children.
+        for (int i = 1; i < mCount;  i+=2) {
+            final View mChild = layoutCont.getChildAt(i);
+
+            if (mChild instanceof ViewGroup) {
+                // Recursively attempt another ViewGroup.
+                Map<String, String> items2 =  getAllChildElements((ViewGroup) mChild);
+                 for(Map.Entry<String, String> e : items2.entrySet())
+                {
+                    items.put(e.getKey(), e.getValue());
+                }
+            } else {
+                TextView r = (TextView)mChild;
+                final TextView text = (TextView)layoutCont.getChildAt(i-1);
+                items.put(text.getText().toString(), r.getText().toString());
+                // Set the font if it is a TextView.
+
+            }
+        }
+        return items;
+    }
 }
+

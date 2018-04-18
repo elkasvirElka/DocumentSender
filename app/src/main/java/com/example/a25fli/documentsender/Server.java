@@ -1,7 +1,10 @@
 package com.example.a25fli.documentsender;
 
+import java.util.Map;
+
 import okhttp3.Callback;
 import okhttp3.HttpUrl;
+import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
@@ -10,6 +13,8 @@ public class Server {
     private String ip;
     private int port;
     private OkHttpClient client;
+
+    public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
 
     public Server(String ip, int port) {
         this.ip = ip;
@@ -47,5 +52,10 @@ public class Server {
         }
         makeGetRequest(getHttpBuilder().addPathSegment("doc_request")
                 .addQueryParameter("id", String.valueOf(userId)).build(), callback);
+    }
+    public void sendPrefile(Callback callback, Map<String, String> item) {
+        RequestBody body = RequestBody.create(JSON, item.toString());
+        makePostRequest(getHttpBuilder().addPathSegment("prefile").build(),
+                body, callback);
     }
 }
