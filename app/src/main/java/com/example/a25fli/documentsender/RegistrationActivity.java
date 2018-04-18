@@ -4,10 +4,19 @@ package com.example.a25fli.documentsender;
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import static android.content.ContentValues.TAG;
 
 
 public class RegistrationActivity extends Activity implements View.OnClickListener{
@@ -17,6 +26,27 @@ public class RegistrationActivity extends Activity implements View.OnClickListen
     codeofissue, placeofregistration, dateofstart, dateoffinish, formofeducation;
     RadioButton man, woman;
 
+    public class TextWatcherP implements TextWatcher {
+        public EditText editText;
+        public TextWatcherP(EditText et){
+            super();
+            editText = et;
+        }
+        public void afterTextChanged(Editable s) {
+            if(editText.getText().length() == 2 || editText.getText().length()==5){
+                editText.setText(editText.getText().toString()+'.');
+                editText.setSelection(editText.getText().length());
+            }
+            if(editText.getText().length() == 11){
+                editText.setText(editText.getText().subSequence(0, editText.getText().length()-1));}
+        }
+        public void beforeTextChanged(CharSequence s, int start, int count, int after){
+        }
+
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+        }
+
+    }
     public RegistrationActivity() {
     }
 
@@ -26,11 +56,12 @@ public class RegistrationActivity extends Activity implements View.OnClickListen
         setContentView(R.layout.registration);
 
 
-
         name = findViewById(R.id.name);
         surname = findViewById(R.id.surname);
         patronymic = findViewById(R.id.patronymic);
         dateofbirth = findViewById(R.id.dateofbirth);
+        TextWatcherP inputTextWatcher= new TextWatcherP(dateofbirth);
+        dateofbirth.addTextChangedListener(inputTextWatcher);
         institute = findViewById(R.id.institute);
         numberofgroup = findViewById(R.id.numberofgroup);
         numberofID = findViewById(R.id.numberofID);

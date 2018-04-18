@@ -5,7 +5,9 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -35,6 +37,7 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class HistoryActivity extends Fragment {
     static final int GALLERY_REQUEST = 1;
+
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -55,6 +58,18 @@ public class HistoryActivity extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         SharedPreferences dateaboutuser = this.getActivity().getSharedPreferences("Save Data", MODE_PRIVATE);
 
+        TextView user_photo = getView().findViewById(R.id.download);
+        user_photo.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
+                photoPickerIntent.setType("image/*");
+                startActivityForResult(photoPickerIntent, GALLERY_REQUEST);
+            }
+        });
+
+
         Button registration = getView().findViewById(R.id.registration);
         TextView stud_ID = getView().findViewById(R.id.stud_ID);
         stud_ID.setText(dateaboutuser.getString("numberofID",""));
@@ -74,8 +89,6 @@ public class HistoryActivity extends Fragment {
         }else{
             registration.setVisibility(View.VISIBLE);
         }
-
-        TextView download = getView().findViewById(R.id.download);
 
         MainActivity.server.getDocRequestList(new Callback() {
             @Override
@@ -142,4 +155,7 @@ public class HistoryActivity extends Fragment {
             }
         });
     }
+
+
+
 }

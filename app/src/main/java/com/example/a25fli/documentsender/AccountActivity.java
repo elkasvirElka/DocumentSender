@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +25,28 @@ public class AccountActivity extends Fragment {
             numberofID, placeofbirth, seriesandnumber, placeofissue, dateofissue,
             codeofissue, placeofregistration, dateofstart, dateoffinish, formofeducation;
     RadioButton man, woman;
+
+    public class TextWatcherP implements TextWatcher {
+        public EditText editText;
+        public TextWatcherP(EditText et){
+            super();
+            editText = et;
+        }
+        public void afterTextChanged(Editable s) {
+            if(editText.getText().length() == 2 || editText.getText().length()==5){
+                editText.setText(editText.getText().toString()+'.');
+                editText.setSelection(editText.getText().length());
+            }
+            if(editText.getText().length() == 11){
+                editText.setText(editText.getText().subSequence(0, editText.getText().length()-1));}
+        }
+        public void beforeTextChanged(CharSequence s, int start, int count, int after){
+        }
+
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+        }
+
+    }
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +67,8 @@ public class AccountActivity extends Fragment {
         surname = getView().findViewById(R.id.surname);
         patronymic = getView().findViewById(R.id.patronymic);
         dateofbirth = getView().findViewById(R.id.dateofbirth);
+        TextWatcherP inputTextWatcher= new TextWatcherP(dateofbirth);
+        dateofbirth.addTextChangedListener(inputTextWatcher);
         institute = getView().findViewById(R.id.institute);
         numberofgroup = getView().findViewById(R.id.numberofgroup);
         numberofID = getView().findViewById(R.id.numberofID);
