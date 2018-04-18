@@ -14,8 +14,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -117,7 +115,12 @@ public class DocumentEditActivity extends Activity {
         Map<String, String> items  = getAllChildElements(myToolbar);
 
         JsonObject jsonObject = new JsonObject();
-        jsonObject.addProperty("doc_id", 1);
+        String myId = "1";
+        Bundle extras = getIntent().getExtras();
+        if(extras != null) {
+            myId = extras.get("docId").toString();
+        }
+        jsonObject.addProperty("doc_id", myId);
         for (Map.Entry<String, String> entry : items.entrySet())
             jsonObject.addProperty(entry.getKey(), entry.getValue());
 
