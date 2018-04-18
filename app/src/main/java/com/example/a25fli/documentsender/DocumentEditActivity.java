@@ -14,6 +14,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -113,6 +115,10 @@ public class DocumentEditActivity extends Activity {
         LinearLayout myToolbar = findViewById(R.id.my_toolbar);
         Map<String, String> items  = getAllChildElements(myToolbar);
 
+        JsonObject jsonObject = new JsonObject();
+        for (Map.Entry<String, String> entry : items.entrySet())
+            jsonObject.addProperty(entry.getKey(), entry.getValue());
+
         MainActivity.server.sendPrefile(new Callback() {
             @Override
             public void onFailure(@NonNull Call call, @NonNull IOException e) {
@@ -160,7 +166,7 @@ public class DocumentEditActivity extends Activity {
                 });
             }
 
-        }, items);
+        }, jsonObject);
     }
     public static final Map<String, String> getAllChildElements(ViewGroup layoutCont) {
         if (layoutCont == null) return new HashMap<String, String>();

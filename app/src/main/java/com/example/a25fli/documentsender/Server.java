@@ -1,5 +1,8 @@
 package com.example.a25fli.documentsender;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+
 import java.util.Map;
 
 import okhttp3.Callback;
@@ -53,8 +56,9 @@ public class Server {
         makeGetRequest(getHttpBuilder().addPathSegment("doc_request")
                 .addQueryParameter("id", String.valueOf(userId)).build(), callback);
     }
-    public void sendPrefile(Callback callback, Map<String, String> item) {
-        RequestBody body = RequestBody.create(JSON, item.toString());
+    public void sendPrefile(Callback callback, JsonObject jsonObject) {
+        Gson gson = new Gson();
+        RequestBody body = RequestBody.create(JSON, gson.toJson(jsonObject));
         makePostRequest(getHttpBuilder().addPathSegment("prefile").build(),
                 body, callback);
     }
