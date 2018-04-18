@@ -22,6 +22,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -148,18 +149,18 @@ public class DocumentEditActivity extends Activity {
                         if (body == null)
                             return;
 
-                        String response_string = null;
-                        try {
-                            response_string = body.string();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                        JsonArray responseJson = parser.parse(response_string).getAsJsonArray();
-                        LinearLayout myToolbar = findViewById(R.id.my_toolbar);
-                        SharedPreferences dateaboutuser = getSharedPreferences("Save Data", MODE_PRIVATE);
+//                        String response_string = null;
+//                        try {
+//                            response_string = body.string();
+//                        } catch (IOException e) {
+//                            e.printStackTrace();
+//                        }
 
-//TODO тут еще передаем картинку
+                        InputStream is = (InputStream)body.byteStream();
+
+                        Helper.getInstance().setInputStreamer(is);
                         Intent intent = new Intent(DocumentEditActivity.this, DocumentShowActivity.class);
+                        //intent.putExtras(bundle);
                         startActivity(intent);
 
                     }
@@ -194,6 +195,32 @@ public class DocumentEditActivity extends Activity {
             }
         }
         return items;
+    }
+}
+class Helper {
+
+    private static Helper mHelper;
+    private InputStream mInputStream;
+
+    private Helper(){
+
+    }
+
+
+    public static Helper getInstance() {
+        if (mHelper != null)
+            return mHelper;
+
+        return new Helper();
+    }
+
+
+    public void setInputStreamer(InputStream is){
+        mInputStream = is;
+    }
+
+    public InputStream getInputStreamer(){
+        return mInputStream;
     }
 }
 
