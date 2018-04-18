@@ -3,8 +3,6 @@ package com.example.a25fli.documentsender;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
-import java.util.Map;
-
 import okhttp3.Callback;
 import okhttp3.HttpUrl;
 import okhttp3.MediaType;
@@ -62,4 +60,9 @@ public class Server {
         makePostRequest(getHttpBuilder().addPathSegment("prefile").build(),
                 body, callback);
     }
+    public void createUser(Callback callback) {
+        makeGetRequest(getHttpBuilder().addPathSegment("create_user_id")
+                .build(), callback);
+    }
+
 }

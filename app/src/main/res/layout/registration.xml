@@ -47,34 +47,6 @@
                 android:inputType="textPersonName"
                 android:hint="Отчество" />
 
-            <TextView
-                android:id="@+id/sex"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Ваш пол:" />
-
-
-            <RadioGroup
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal"
-                    android:id="@+id/sexs"
-                    android:layout_weight="1" >
-
-                    <RadioButton
-                        android:id="@+id/sex_man"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Мужской" />
-
-                    <RadioButton
-                        android:id="@+id/sex_woman"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Женский" />
-            </RadioGroup>
 
             <EditText
                 android:id="@+id/dateofbirth"

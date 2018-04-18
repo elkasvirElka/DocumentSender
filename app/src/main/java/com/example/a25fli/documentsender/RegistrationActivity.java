@@ -4,10 +4,21 @@ package com.example.a25fli.documentsender;
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.Toast;
+
+import com.google.gson.JsonParser;
+
+import java.io.IOException;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Response;
+import okhttp3.ResponseBody;
 
 
 public class RegistrationActivity extends Activity implements View.OnClickListener{
@@ -47,38 +58,78 @@ public class RegistrationActivity extends Activity implements View.OnClickListen
 
         savedatebutton.setOnClickListener((View.OnClickListener) this);
 
-        man = findViewById(R.id.sex_man);
-        woman = findViewById(R.id.sex_woman);
         loaddate();
     }
 
     private void savedate(){
-        dateaboutuser = getSharedPreferences("Save Data", MODE_PRIVATE);
-        SharedPreferences.Editor edit = dateaboutuser.edit();
-        edit.putString("name", name.getText().toString());
-        edit.putString("surname", surname.getText().toString());
-        edit.putString("patronymic", patronymic.getText().toString());
-        edit.putString("dateofbirth", dateofbirth.getText().toString());
-        edit.putString("institute", institute.getText().toString());
-        edit.putString("numberofgroup", numberofgroup.getText().toString());
-        edit.putString("numberofID",numberofID.getText().toString());
-        edit.putString("formofeducation",formofeducation.getText().toString());
-        edit.putString("dateofstart", dateofstart.getText().toString());
-        edit.putString("dateoffinish", dateoffinish.getText().toString());
-        edit.putString("placeofbirth",placeofbirth.getText().toString());
-        edit.putString("seriesandnumber", seriesandnumber.getText().toString());
-        edit.putString("placeofissue", placeofissue.getText().toString());
-        edit.putString("dateofissue", dateofissue.getText().toString());
-        edit.putString("codeofissue",codeofissue.getText().toString());
-        edit.putString("placeofregistration", placeofregistration.getText().toString());
-        if(man.isChecked()) {
-            edit.putString("sex", "М");
 
-        }
-        if(woman.isChecked()){
-            edit.putString("sex", "Ж");
-        }
-            edit.commit();
+        MainActivity.server.createUser(new Callback() {
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast error = Toast.makeText(RegistrationActivity.this,"Ошибка подключения", Toast.LENGTH_LONG);
+                        error.show();
+                    }
+                });
+            }
+
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull final Response response)
+                    throws IOException {
+
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                if (response.code() != 200)
+                    return;
+
+                JsonParser parser = new JsonParser();
+                ResponseBody body = response.body();
+
+                if (body == null)
+                    return;
+
+                String response_string = null;
+                try {
+                    response_string = body.string();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                assert response_string != null;
+
+              //  final JsonArray responseJson = parser.parse(response_string).getAsJsonArray();
+
+                        dateaboutuser = getSharedPreferences("Save Data", MODE_PRIVATE);
+                        SharedPreferences.Editor edit = dateaboutuser.edit();
+                        edit.putString("userId", response_string);
+                        edit.putString("name", name.getText().toString());
+                        edit.putString("surname", surname.getText().toString());
+                        edit.putString("patronymic", patronymic.getText().toString());
+                        edit.putString("dateofbirth", dateofbirth.getText().toString());
+                        edit.putString("institute", institute.getText().toString());
+                        edit.putString("numberofgroup", numberofgroup.getText().toString());
+                        edit.putString("numberofID",numberofID.getText().toString());
+                        edit.putString("formofeducation",formofeducation.getText().toString());
+                        edit.putString("dateofstart", dateofstart.getText().toString());
+                        edit.putString("dateoffinish", dateoffinish.getText().toString());
+                        edit.putString("placeofbirth",placeofbirth.getText().toString());
+                        edit.putString("seriesandnumber", seriesandnumber.getText().toString());
+                        edit.putString("placeofissue", placeofissue.getText().toString());
+                        edit.putString("dateofissue", dateofissue.getText().toString());
+                        edit.putString("codeofissue",codeofissue.getText().toString());
+                        edit.putString("placeofregistration", placeofregistration.getText().toString());
+
+                        edit.commit();
+                    }
+                });
+            }
+
+
+        });
+
     }
     private void loaddate(){
         dateaboutuser = getSharedPreferences("Save Data", MODE_PRIVATE);
@@ -100,12 +151,6 @@ public class RegistrationActivity extends Activity implements View.OnClickListen
         dateofissue.setText(dateaboutuser.getString("dateofissue", ""));
         codeofissue.setText(dateaboutuser.getString("codeofissue",""));
         placeofregistration.setText(dateaboutuser.getString("placeofregistration", ""));
-        if(dateaboutuser.getString("sex", "")=="М"){
-            man.setChecked(true);
-        }
-        if(dateaboutuser.getString("sex","")=="Ж"){
-            woman.setChecked(true);
-        }
     }
 
     @Override

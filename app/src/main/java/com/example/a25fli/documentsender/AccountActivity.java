@@ -56,8 +56,6 @@ public class AccountActivity extends Fragment {
         codeofissue = getView().findViewById(R.id.codeofissue);
         placeofregistration = getView().findViewById(R.id.placeofregistration);
         Button savedatebutton = getView().findViewById(R.id.savedate);
-        man = getView().findViewById(R.id.sex_man);
-        woman = getView().findViewById(R.id.sex_woman);
         savedatebutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

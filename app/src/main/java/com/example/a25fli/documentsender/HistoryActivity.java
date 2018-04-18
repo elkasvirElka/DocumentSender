@@ -4,7 +4,6 @@ package com.example.a25fli.documentsender;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -13,7 +12,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -68,14 +66,12 @@ public class HistoryActivity extends Fragment {
         stud_fac.setText(dateaboutuser.getString("institute",""));
         TextView stud_form = getView().findViewById(R.id.stud_form);
         stud_form.setText(dateaboutuser.getString("formofeducation",""));
-        String saveddate = dateaboutuser.getString("name", "");
-        if(saveddate.length() > 0){
+        String userId = dateaboutuser.getString("userId", "");
+        if(userId.length() > 0){
             registration.setVisibility(View.GONE);
         }else{
             registration.setVisibility(View.VISIBLE);
-        }
-
-        TextView download = getView().findViewById(R.id.download);
+         }
 
         MainActivity.server.getDocRequestList(new Callback() {
             @Override
@@ -133,7 +129,7 @@ public class HistoryActivity extends Fragment {
             }
 
 
-        }, "0");
+        }, userId);
         registration.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
