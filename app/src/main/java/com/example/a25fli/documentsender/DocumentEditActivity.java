@@ -55,29 +55,29 @@ public class DocumentEditActivity extends Activity {
             @Override
             public void onResponse(@NonNull Call call, @NonNull final Response response)
                     throws IOException {
+                // status.setText("Успешное подключение!");
+                if (response.code() != 200)
+                    return;
+
+                JsonParser parser = new JsonParser();
+                ResponseBody body = response.body();
+
+                if (body == null)
+                    return;
+
+                String response_string = null;
+                try {
+                    response_string = body.string();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                assert response_string != null;
+                final JsonArray responseJson = parser.parse(response_string).getAsJsonArray();
+                final LinearLayout myToolbar = findViewById(R.id.my_toolbar);
+                final SharedPreferences dateaboutuser = getSharedPreferences("Save Data", MODE_PRIVATE);
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        // status.setText("Успешное подключение!");
-                        if (response.code() != 200)
-                            return;
-
-                        JsonParser parser = new JsonParser();
-                        ResponseBody body = response.body();
-
-                        if (body == null)
-                            return;
-
-                        String response_string = null;
-                        try {
-                            response_string = body.string();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                        JsonArray responseJson = parser.parse(response_string).getAsJsonArray();
-                        LinearLayout myToolbar = findViewById(R.id.my_toolbar);
-                        SharedPreferences dateaboutuser = getSharedPreferences("Save Data", MODE_PRIVATE);
-
                         for (JsonElement element : responseJson) {
                             JsonObject object = element.getAsJsonObject();
 //
