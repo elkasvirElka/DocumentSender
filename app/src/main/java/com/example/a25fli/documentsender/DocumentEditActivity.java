@@ -116,6 +116,7 @@ public class DocumentEditActivity extends Activity {
         Map<String, String> items  = getAllChildElements(myToolbar);
 
         JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("doc_id", 1);
         for (Map.Entry<String, String> entry : items.entrySet())
             jsonObject.addProperty(entry.getKey(), entry.getValue());
 
