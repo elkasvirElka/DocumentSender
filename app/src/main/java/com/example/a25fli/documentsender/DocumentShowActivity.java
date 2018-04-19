@@ -2,11 +2,12 @@ package com.example.a25fli.documentsender;
 
 
 import android.app.Activity;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.widget.ImageView;
 
-import java.io.InputStream;
+import com.squareup.picasso.Picasso;
+
+import java.io.File;
 
 
 public class DocumentShowActivity extends Activity {
@@ -14,11 +15,18 @@ public class DocumentShowActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.document_show);
+        Bundle extras = getIntent().getExtras();
+        File f = new File(getIntent().getStringExtra("picture"));
+//        byte[] byteArray = extras.getByteArray("picture");
 
-        InputStream theInputStream = Helper.getInstance().getInputStreamer();
-        Drawable d = Drawable.createFromStream(theInputStream, "src");
-        ImageView imageView = findViewById(R.id.my_img);
-        imageView.setImageDrawable(d);
+//        Bitmap bmp = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
+        ImageView image = (ImageView) findViewById(R.id.my_img);
+        Picasso.get().load(f).resize(800,800).centerInside().into(image);
+//        image.setImageBitmap(bmp);
+//        InputStream theInputStream = Helper.getInstance().getInputStreamer();
+//        Drawable d = Drawable.createFromStream(theInputStream, "src");
+//        ImageView imageView = findViewById(R.id.my_img);
+//        imageView.setImageDrawable(d);
     }
 //    @Override
 //    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {

@@ -79,7 +79,8 @@ public class HistoryActivity extends Fragment {
         });
 
         be_photo = getActivity().getSharedPreferences("photo", Context.MODE_PRIVATE);
-        if(be_photo.getString("saved","")=="da"){
+        //
+        if(be_photo.getString("saved","").equals("da")){
             try {
                 ContextWrapper cw = new ContextWrapper(getActivity().getApplicationContext());
                 File path1 = cw.getDir("imageDir", Context.MODE_PRIVATE);

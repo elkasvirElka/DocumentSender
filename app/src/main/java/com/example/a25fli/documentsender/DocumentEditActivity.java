@@ -19,8 +19,11 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -36,8 +39,8 @@ public class DocumentEditActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.document_edit);
         String myId = "0";
-         Bundle extras = getIntent().getExtras();
-        if(extras != null) {
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
             myId = extras.get("docId").toString();
         }
 
@@ -110,14 +113,15 @@ public class DocumentEditActivity extends Activity {
 
         }, myId);
     }
+
     private void onClickShowDoc() {
         LinearLayout myToolbar = findViewById(R.id.my_toolbar);
-        Map<String, String> items  = getAllChildElements(myToolbar);
+        Map<String, String> items = getAllChildElements(myToolbar);
 
         JsonObject jsonObject = new JsonObject();
         String myId = "1";
         Bundle extras = getIntent().getExtras();
-        if(extras != null) {
+        if (extras != null) {
             myId = extras.get("docId").toString();
         }
         jsonObject.addProperty("doc_id", myId);
@@ -139,6 +143,7 @@ public class DocumentEditActivity extends Activity {
             @Override
             public void onResponse(@NonNull Call call, @NonNull final Response response)
                     throws IOException {
+                final File out = saveToFile(response);
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -152,20 +157,47 @@ public class DocumentEditActivity extends Activity {
                         if (body == null)
                             return;
 
-//                        String response_string = null;
-//                        try {
-//                            response_string = body.string();
-//                        } catch (IOException e) {
-//                            e.printStackTrace();
-//                        }
+//                        InputStream is = (InputStream) body.byteStream();
+                        /*byte[] byteArray = new byte[0];
+                        try {
+                            byteArray = new byte[is.available()];
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        try {
+                            is.read(byteArray);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }*/
+                        //2 вариант
+                        //byte[] byteArray = ByteStreams.toByteArray(is);
+                        //3 variant
+                        /*byte[] byteArray = new byte[0];
+                        try {
+                            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
 
-                        InputStream is = (InputStream)body.byteStream();
+                            int nRead;
+                            byte[] data = new byte[16384];
 
-                        Helper.getInstance().setInputStreamer(is);
-                        Intent intent = new Intent(DocumentEditActivity.this, DocumentShowActivity.class);
-                        //intent.putExtras(bundle);
-                        startActivity(intent);
+                            while ((nRead = is.read(data, 0, data.length)) != -1) {
+                                buffer.write(data, 0, nRead);
+                            }
 
+                            buffer.flush();
+
+                            byteArray = buffer.toByteArray();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }*/
+
+//                        Helper.getInstance().setInputStreamer(is);
+                        if (out!=null) {
+                            Intent intent = new Intent(DocumentEditActivity.this, DocumentShowActivity.class);
+                            intent.putExtra("picture", out.getAbsolutePath());
+                            startActivity(intent);
+                        }else{
+                            Toast.makeText(DocumentEditActivity.this, "Произошла ошибка сохранения файла",Toast.LENGTH_SHORT).show();
+                        }
                     }
 
                 });
@@ -173,25 +205,39 @@ public class DocumentEditActivity extends Activity {
 
         }, jsonObject);
     }
+
+    private File saveToFile(Response response) {
+        File f = null;
+        try {
+            f = File.createTempFile("SOMEpIC", ".PNG", this.getCacheDir());
+            InputStream is = (InputStream) response.body().byteStream();
+            OutputStream fos = new FileOutputStream(f);
+            fos.write(response.body().bytes());
+            fos.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return f;
+    }
+
     public static final Map<String, String> getAllChildElements(ViewGroup layoutCont) {
         if (layoutCont == null) return new HashMap<String, String>();
         Map<String, String> items = new HashMap<String, String>();
         final int mCount = layoutCont.getChildCount();
 
         // Loop through all of the children.
-        for (int i = 1; i < mCount;  i+=2) {
+        for (int i = 1; i < mCount; i += 2) {
             final View mChild = layoutCont.getChildAt(i);
 
             if (mChild instanceof ViewGroup) {
                 // Recursively attempt another ViewGroup.
-                Map<String, String> items2 =  getAllChildElements((ViewGroup) mChild);
-                 for(Map.Entry<String, String> e : items2.entrySet())
-                {
+                Map<String, String> items2 = getAllChildElements((ViewGroup) mChild);
+                for (Map.Entry<String, String> e : items2.entrySet()) {
                     items.put(e.getKey(), e.getValue());
                 }
             } else {
-                TextView r = (TextView)mChild;
-                final TextView text = (TextView)layoutCont.getChildAt(i-1);
+                TextView r = (TextView) mChild;
+                final TextView text = (TextView) layoutCont.getChildAt(i - 1);
                 items.put(text.getText().toString(), r.getText().toString());
                 // Set the font if it is a TextView.
 
@@ -200,12 +246,13 @@ public class DocumentEditActivity extends Activity {
         return items;
     }
 }
+
 class Helper {
 
     private static Helper mHelper;
     private InputStream mInputStream;
 
-    private Helper(){
+    private Helper() {
 
     }
 
@@ -218,11 +265,11 @@ class Helper {
     }
 
 
-    public void setInputStreamer(InputStream is){
+    public void setInputStreamer(InputStream is) {
         mInputStream = is;
     }
 
-    public InputStream getInputStreamer(){
+    public InputStream getInputStreamer() {
         return mInputStream;
     }
 }
