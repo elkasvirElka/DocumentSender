@@ -13,7 +13,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RadioButton;
 import android.widget.Toast;
 
 import static android.content.Context.MODE_PRIVATE;
@@ -24,7 +23,6 @@ public class AccountActivity extends Fragment {
     EditText name, surname, patronymic, dateofbirth, institute, numberofgroup,
             numberofID, placeofbirth, seriesandnumber, placeofissue, dateofissue,
             codeofissue, placeofregistration, dateofstart, dateoffinish, formofeducation;
-    RadioButton man, woman;
 
     public class TextWatcherP implements TextWatcher {
         public EditText editText;
@@ -110,13 +108,7 @@ public class AccountActivity extends Fragment {
         edit.putString("dateofissue", dateofissue.getText().toString());
         edit.putString("codeofissue",codeofissue.getText().toString());
         edit.putString("placeofregistration", placeofregistration.getText().toString());
-        if(man.isChecked()) {
-            edit.putString("sex", "М");
 
-        }
-        if(woman.isChecked()){
-            edit.putString("sex", "Ж");
-        }
 
         edit.commit();
         Toast msg = Toast.makeText(getActivity(),"Успешно", Toast.LENGTH_LONG);
@@ -146,11 +138,7 @@ public class AccountActivity extends Fragment {
         placeofregistration.setText(dateaboutuser.getString("placeofregistration", ""));
 
 
-        switch (dateaboutuser.getString("sex","")){
-            case "М": man.setChecked(true); break;
-            case "Ж": woman.setChecked(true); break;
-            default: break;
-        }
+
 
 
     }
