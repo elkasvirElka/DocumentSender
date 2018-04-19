@@ -23,6 +23,12 @@
         <activity android:name=".DocumentEditActivity"
             android:screenOrientation="portrait">
         </activity>
+        <activity android:name=".SettingsEditPhotoActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity android:name=".SettingsAboutAppActivity"
+            android:screenOrientation="portrait">
+        </activity>
         <activity android:name=".RegistrationActivity"
             android:noHistory="true"
             android:screenOrientation="portrait">

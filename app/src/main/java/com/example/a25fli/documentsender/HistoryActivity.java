@@ -96,6 +96,13 @@ public class HistoryActivity extends Fragment {
         }
 
         Button registration = getView().findViewById(R.id.registration);
+        dateaboutuser = getActivity().getSharedPreferences("Save Data", MODE_PRIVATE);
+        if(dateaboutuser.getString("regist","").equals("ok")){
+            registration.setVisibility(View.GONE);
+        }
+        else{
+            registration.setVisibility(View.VISIBLE);
+        }
         TextView stud_ID = getView().findViewById(R.id.stud_ID);
         stud_ID.setText(dateaboutuser.getString("numberofID",""));
         TextView stud_name = getView().findViewById(R.id.stud_name);
@@ -109,11 +116,6 @@ public class HistoryActivity extends Fragment {
         TextView stud_form = getView().findViewById(R.id.stud_form);
         stud_form.setText(dateaboutuser.getString("formofeducation",""));
         String userId = dateaboutuser.getString("userId", "");
-        if(userId.length() > 0){
-            registration.setVisibility(View.GONE);
-        }else{
-            registration.setVisibility(View.VISIBLE);
-         }
 
         MainActivity.server.getDocRequestList(new Callback() {
             @Override

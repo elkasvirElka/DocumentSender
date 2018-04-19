@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,12 +21,6 @@ import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
-import static android.content.ContentValues.TAG;
 
 
 public class RegistrationActivity extends Activity implements View.OnClickListener{
@@ -186,6 +179,10 @@ public class RegistrationActivity extends Activity implements View.OnClickListen
 
     @Override
     public void onClick(View view) {
+        dateaboutuser = getSharedPreferences("Save Data", MODE_PRIVATE);
+        SharedPreferences.Editor edit = dateaboutuser.edit();
+        edit.putString("regist","ok");
+        edit.commit();
         savedate();
         this.finish();
 
