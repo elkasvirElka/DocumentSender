@@ -2,9 +2,12 @@ package com.example.a25fli.documentsender;
 
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -15,6 +18,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,6 +28,10 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -32,10 +40,12 @@ import okhttp3.Callback;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
 
+import static android.app.Activity.RESULT_OK;
 import static android.content.Context.MODE_PRIVATE;
 
 public class HistoryActivity extends Fragment {
     static final int GALLERY_REQUEST = 1;
+    SharedPreferences be_photo;
 
     @Override
     public void onCreate(Bundle savedInstanceState){
@@ -68,6 +78,21 @@ public class HistoryActivity extends Fragment {
             }
         });
 
+        be_photo = getActivity().getSharedPreferences("photo", Context.MODE_PRIVATE);
+        if(be_photo.getString("saved","")=="da"){
+            try {
+                ContextWrapper cw = new ContextWrapper(getActivity().getApplicationContext());
+                File path1 = cw.getDir("imageDir", Context.MODE_PRIVATE);
+                File f = new File(path1, "profile.jpg");
+                Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
+                ImageView img = getView().findViewById(R.id.imageView);
+                img.setImageBitmap(b);
+                TextView textView = getView().findViewById(R.id.download);
+                textView.setVisibility(View.GONE);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
 
         Button registration = getView().findViewById(R.id.registration);
         TextView stud_ID = getView().findViewById(R.id.stud_ID);
@@ -154,7 +179,56 @@ public class HistoryActivity extends Fragment {
             }
         });
     }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent imageReturnedIntent) {
+        super.onActivityResult(requestCode, resultCode, imageReturnedIntent);
 
+        Bitmap bitmap = null;
+        ImageView imageView = getView().findViewById(R.id.imageView);
+
+        switch (requestCode) {
+            case GALLERY_REQUEST:
+                if (resultCode == RESULT_OK) {
+                    Uri selectedImage = imageReturnedIntent.getData();
+                    try {
+                        bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), selectedImage);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    imageView.setImageBitmap(bitmap);
+                    saveToInternalSorage(bitmap);
+                    TextView textView = getView().findViewById(R.id.download);
+                    textView.setVisibility(View.GONE);
+                }
+        }
+
+    }
+
+
+    private String saveToInternalSorage(Bitmap bitmapImage) {
+        ContextWrapper cw = new ContextWrapper(getActivity().getApplicationContext());
+        File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
+        // Create imageDir
+        File mypath = new File(directory, "profile.jpg");
+
+        FileOutputStream fos = null;
+        try {
+
+            fos = new FileOutputStream(mypath);
+
+
+            bitmapImage.compress(Bitmap.CompressFormat.PNG, 100, fos);
+            fos.close();
+
+            SharedPreferences.Editor editor = be_photo.edit();
+            editor.putString("saved", "da");
+            editor.commit();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return directory.getAbsolutePath();
+    }
 
 
 }
