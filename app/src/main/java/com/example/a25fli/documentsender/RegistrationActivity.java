@@ -4,23 +4,12 @@ package com.example.a25fli.documentsender;
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
-import android.widget.Toast;
-
-import com.google.gson.JsonParser;
-
-import java.io.IOException;
-
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.Response;
-import okhttp3.ResponseBody;
 
 
 public class RegistrationActivity extends Activity implements View.OnClickListener{
@@ -71,11 +60,17 @@ public class RegistrationActivity extends Activity implements View.OnClickListen
         numberofID = findViewById(R.id.numberofID);
         formofeducation = findViewById(R.id.formofeducation);
         dateofstart = findViewById(R.id.dateofstart);
+        TextWatcherP input1= new TextWatcherP(dateofstart);
+        dateofstart.addTextChangedListener(input1);
         dateoffinish = findViewById(R.id.dateoffinish);
+        TextWatcherP input2= new TextWatcherP(dateoffinish);
+        dateoffinish.addTextChangedListener(input2);
         placeofbirth = findViewById(R.id.placeofbirth);
         seriesandnumber = findViewById(R.id.seriesandnumber);
         placeofissue = findViewById(R.id.placeofissue);
         dateofissue = findViewById(R.id.dateofissue);
+        TextWatcherP input3= new TextWatcherP(dateofissue);
+        dateofissue.addTextChangedListener(input3);
         codeofissue = findViewById(R.id.codeofissue);
         placeofregistration = findViewById(R.id.placeofregistration);
         Button savedatebutton = findViewById(R.id.savedate);
@@ -87,48 +82,10 @@ public class RegistrationActivity extends Activity implements View.OnClickListen
 
     private void savedate(){
 
-        MainActivity.server.createUser(new Callback() {
-            @Override
-            public void onFailure(@NonNull Call call, @NonNull IOException e) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Toast error = Toast.makeText(RegistrationActivity.this,"Ошибка подключения", Toast.LENGTH_LONG);
-                        error.show();
-                    }
-                });
-            }
-
-            @Override
-            public void onResponse(@NonNull Call call, @NonNull final Response response)
-                    throws IOException {
-
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                if (response.code() != 200)
-                    return;
-
-                JsonParser parser = new JsonParser();
-                ResponseBody body = response.body();
-
-                if (body == null)
-                    return;
-
-                String response_string = null;
-                try {
-                    response_string = body.string();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
-                assert response_string != null;
-
-              //  final JsonArray responseJson = parser.parse(response_string).getAsJsonArray();
 
                         dateaboutuser = getSharedPreferences("Save Data", MODE_PRIVATE);
                         SharedPreferences.Editor edit = dateaboutuser.edit();
-                        edit.putString("userId", response_string);
+                        edit.putString("userId", "1");
                         edit.putString("name", name.getText().toString());
                         edit.putString("surname", surname.getText().toString());
                         edit.putString("patronymic", patronymic.getText().toString());
@@ -148,13 +105,8 @@ public class RegistrationActivity extends Activity implements View.OnClickListen
 
                         edit.commit();
                     }
-                });
-            }
 
 
-        });
-
-    }
     private void loaddate(){
         dateaboutuser = getSharedPreferences("Save Data", MODE_PRIVATE);
 

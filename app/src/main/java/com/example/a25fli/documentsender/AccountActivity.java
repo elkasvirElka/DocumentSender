@@ -72,11 +72,17 @@ public class AccountActivity extends Fragment {
         numberofID = getView().findViewById(R.id.numberofID);
         formofeducation = getView().findViewById(R.id.formofeducation);
         dateofstart = getView().findViewById(R.id.dateofstart);
+        TextWatcherP input1= new TextWatcherP(dateofstart);
+        dateofstart.addTextChangedListener(input1);
         dateoffinish = getView().findViewById(R.id.dateoffinish);
+        TextWatcherP input2= new TextWatcherP(dateoffinish);
+        dateoffinish.addTextChangedListener(input2);
         placeofbirth = getView().findViewById(R.id.placeofbirth);
         seriesandnumber = getView().findViewById(R.id.seriesandnumber);
         placeofissue = getView().findViewById(R.id.placeofissue);
         dateofissue = getView().findViewById(R.id.dateofissue);
+        TextWatcherP input3= new TextWatcherP(dateofissue);
+        dateofissue.addTextChangedListener(input3);
         codeofissue = getView().findViewById(R.id.codeofissue);
         placeofregistration = getView().findViewById(R.id.placeofregistration);
         Button savedatebutton = getView().findViewById(R.id.savedate);
