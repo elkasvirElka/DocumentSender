@@ -157,40 +157,6 @@ public class DocumentEditActivity extends Activity {
                         if (body == null)
                             return;
 
-//                        InputStream is = (InputStream) body.byteStream();
-                        /*byte[] byteArray = new byte[0];
-                        try {
-                            byteArray = new byte[is.available()];
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                        try {
-                            is.read(byteArray);
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }*/
-                        //2 вариант
-                        //byte[] byteArray = ByteStreams.toByteArray(is);
-                        //3 variant
-                        /*byte[] byteArray = new byte[0];
-                        try {
-                            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-
-                            int nRead;
-                            byte[] data = new byte[16384];
-
-                            while ((nRead = is.read(data, 0, data.length)) != -1) {
-                                buffer.write(data, 0, nRead);
-                            }
-
-                            buffer.flush();
-
-                            byteArray = buffer.toByteArray();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }*/
-
-//                        Helper.getInstance().setInputStreamer(is);
                         if (out!=null) {
                             Intent intent = new Intent(DocumentEditActivity.this, DocumentShowActivity.class);
                             intent.putExtra("picture", out.getAbsolutePath());
@@ -246,31 +212,3 @@ public class DocumentEditActivity extends Activity {
         return items;
     }
 }
-
-class Helper {
-
-    private static Helper mHelper;
-    private InputStream mInputStream;
-
-    private Helper() {
-
-    }
-
-
-    public static Helper getInstance() {
-        if (mHelper != null)
-            return mHelper;
-
-        return new Helper();
-    }
-
-
-    public void setInputStreamer(InputStream is) {
-        mInputStream = is;
-    }
-
-    public InputStream getInputStreamer() {
-        return mInputStream;
-    }
-}
-

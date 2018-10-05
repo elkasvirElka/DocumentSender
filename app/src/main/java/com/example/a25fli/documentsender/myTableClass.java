@@ -1,7 +1,7 @@
 package com.example.a25fli.documentsender;
 
 /**
- * Created by 25fli on 13.04.2018.
+ * работа с гридом разм больше 1 столца
  */
 public class myTableClass {
 

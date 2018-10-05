@@ -8,7 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-
+//класс для вставки данных в грил размерностью больше одного столбца
 public class MyAdapter extends BaseAdapter {
 
     ArrayList<myTableClass> data = new ArrayList<myTableClass>();
